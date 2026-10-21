@@ -1,0 +1,100 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function ownBook(bookId) { return signedIn() && request.auth.uid == bookId; }
+    function canReadBook(bookId) {
+      return signedIn() && (request.auth.uid == bookId
+        || get(/databases/$(database)/documents/books/$(bookId)).data.visibility == 'members');
+    }
+    function validProfile(data) {
+      return data.keys().hasAll(['displayName','createdAt','memberId'])
+        && data.keys().hasOnly(['displayName','createdAt','memberId'])
+        && data.displayName is string && data.displayName.size() > 0 && data.displayName.size() <= 40
+        && data.memberId is string && data.memberId.matches('^[1-9][0-9]{7}$')
+        && data.createdAt is timestamp;
+    }
+    function linkedDirectory(uid, data) {
+      let entry = getAfter(/databases/$(database)/documents/members/$(data.memberId)).data;
+      return entry.ownerId == uid && entry.displayName == data.displayName
+        && entry.searchName == data.displayName.lower();
+    }
+    function validMember(data, memberId) {
+      let profile = getAfter(/databases/$(database)/documents/profiles/$(request.auth.uid)).data;
+      return memberId.matches('^[1-9][0-9]{7}$')
+        && data.keys().hasAll(['ownerId','displayName','searchName'])
+        && data.keys().hasOnly(['ownerId','displayName','searchName'])
+        && data.ownerId == request.auth.uid && profile.memberId == memberId
+        && data.displayName == profile.displayName && data.searchName == profile.displayName.lower();
+    }
+    function validBook(data, bookId) {
+      return data.keys().hasAll(['ownerId','title','visibility','template','createdAt'])
+        && data.keys().hasOnly(['ownerId','title','visibility','template','createdAt'])
+        && data.ownerId == bookId && data.title is string && data.title.size() > 0 && data.title.size() <= 80
+        && data.visibility in ['private','members'] && data.template == 'sofia-v1'
+        && data.createdAt is timestamp;
+    }
+    function validRecipe(data, recipeId) {
+      return data.keys().hasAll(['id','title','category','time','mood','emoji','imageUrl','ingredients','prePrep','steps','tip'])
+        && data.keys().hasOnly(['id','title','category','time','mood','emoji','imageUrl','ingredients','prePrep','steps','tip'])
+        && data.id == recipeId && recipeId.matches('^[A-Za-z0-9_-]{1,100}$')
+        && data.title is string && data.title.size() > 0 && data.title.size() <= 300
+        && data.category in ['chinese','western','dessert','drink']
+        && data.time is string && data.time.size() <= 1000
+        && data.mood is string && data.mood.size() <= 1000
+        && data.emoji is string && data.emoji.size() <= 100
+        && data.imageUrl is string && (data.imageUrl == '' || data.imageUrl.matches('^https?://.*'))
+        && data.ingredients is list && data.ingredients.size() <= 1000
+        && data.prePrep is string && data.prePrep.size() <= 100000
+        && data.steps is list && data.steps.size() <= 1000
+        && data.tip is string && data.tip.size() <= 100000;
+    }
+    function validState(data) {
+      return data.keys().hasAll(['kind','revision','updatedAt'])
+        && data.keys().hasOnly(['kind','revision','updatedAt'])
+        && data.kind == 'sofia-book-state' && data.revision is int && data.revision > 0
+        && data.updatedAt is timestamp;
+    }
+    match /profiles/{uid} {
+      allow get: if signedIn();
+      allow list: if false;
+      allow create: if ownBook(uid) && validProfile(request.resource.data) && linkedDirectory(uid,request.resource.data);
+      allow update: if ownBook(uid) && validProfile(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt
+        && (!('memberId' in resource.data) || request.resource.data.memberId == resource.data.memberId)
+        && linkedDirectory(uid,request.resource.data);
+      allow delete: if false;
+    }
+    // The searchable directory contains no email, book title or recipe content.
+    match /members/{memberId} {
+      allow get: if signedIn();
+      allow list: if signedIn() && request.query.limit != null && request.query.limit <= 20;
+      allow create: if signedIn() && validMember(request.resource.data,memberId);
+      allow update: if signedIn() && resource.data.ownerId == request.auth.uid
+        && validMember(request.resource.data,memberId);
+      allow delete: if false;
+    }
+    match /books/{bookId} {
+      allow get: if canReadBook(bookId);
+      allow list: if false;
+      allow create: if ownBook(bookId) && validBook(request.resource.data,bookId);
+      allow update: if ownBook(bookId) && validBook(request.resource.data,bookId)
+        && request.resource.data.ownerId == resource.data.ownerId
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if false;
+      match /recipes/{recipeId} {
+        allow read: if canReadBook(bookId);
+        allow create, update: if ownBook(bookId)
+          && exists(/databases/$(database)/documents/books/$(bookId))
+          && ((recipeId == 'sofia-book-state' && validState(request.resource.data))
+            || (recipeId != 'sofia-book-state' && validRecipe(request.resource.data,recipeId)));
+        allow delete: if ownBook(bookId) && recipeId != 'sofia-book-state';
+      }
+    }
+    // Keep the old data as a private, read-only migration source. No public reads remain.
+    match /recipes/{recipeId} {
+      allow read: if signedIn() && request.auth.uid == 'DipeHVpohTZh6gsaguD5oTgNV0D2';
+      allow write: if false;
+    }
+  }
+}

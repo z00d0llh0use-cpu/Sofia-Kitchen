@@ -1,0 +1,28 @@
+import fs from 'node:fs';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+import {webcrypto} from 'node:crypto';
+const disk=new Map(),session=new Map(),elements=new Map();
+const storage=map=>({getItem:key=>map.get(key)||null,setItem:(key,value)=>map.set(key,value),removeItem:key=>map.delete(key)});
+function node(){return {textContent:'',value:'',hidden:true,disabled:false,children:[],events:{},classList:{toggle(){}},setAttribute(){},removeAttribute(key){delete this[key]},append(...items){this.children.push(...items)},replaceChildren(...items){this.children=items},addEventListener(kind,fn){this.events[kind]=fn}};}
+const get=id=>{if(!elements.has(id))elements.set(id,node());return elements.get(id)};
+const sandbox={crypto:webcrypto,TextEncoder,Uint8Array,queueMicrotask,setTimeout,console,localStorage:storage(disk),sessionStorage:storage(session),addEventListener(){},document:{createElement:node},URLSearchParams,location:{search:''}};
+sandbox.window=sandbox;sandbox.SOFIA_FIREBASE_SETTINGS={founderUid:'founder'};
+const ctx=vm.createContext(sandbox),run=code=>vm.runInContext(code,ctx),tick=()=>new Promise(resolve=>setTimeout(resolve,10));
+run(fs.readFileSync('tests/fixtures/demo-sdk.js','utf8'));const sdk=await run('SOFIA_DEMO_LOADER()'),auth=sdk.getAuth();
+await sdk.signInWithEmailAndPassword(auth,'friend@demo.local','RecipeDemo2026!');
+let redirect=false;
+ctx.Member={state:{sdk,auth,db:{}},$:get,searchName:text=>text.trim().toLowerCase(),protect:async()=>auth.currentUser,ensureAccount:async()=>{},requireLogin(){redirect=true},message(id,text,bad){get(id).textContent=text;get(id).bad=bad},errorText:error=>error.message};
+run(fs.readFileSync('dist/member-discover.js','utf8'));await tick();
+let count=0;async function test(name,fn){await fn();count++;console.log('PASS '+name)};
+const search=async text=>{get('memberSearch').value=text;await get('searchForm').events.submit({preventDefault(){}});await tick()};
+await test('Case-insensitive nickname prefix finds founder with no email in results',async()=>{await search('SO');const results=get('searchResults').children;assert.equal(results.length,1);assert.equal(results[0].href,'./profile.html?id=10000001');assert.ok(!JSON.stringify(results).includes('sofia@demo.local'))});
+await test('Exact eight digit ID finds a private-book member without reading their recipes',async()=>{await search('10000002');assert.equal(get('searchResults').children.length,1);assert.equal(get('searchResults').children[0].children[1].children[0].textContent,'料理朋友')});
+await test('No match clears previous results and displays a useful message',async()=>{await search('不存在');assert.equal(get('searchResults').children.length,0);assert.match(get('searchMessage').textContent,/找不到/)});
+await test('Untrusted nickname is rendered as text rather than HTML',async()=>{const d=JSON.parse(disk.get('sofia_member_demo_db_v1'));d['members/22222222']={ownerId:'unsafe',displayName:'<img src=x onerror=alert(1)>',searchName:'<img src=x onerror=alert(1)>'};disk.set('sofia_member_demo_db_v1',JSON.stringify(d));await search('<img');assert.equal(get('searchResults').children[0].children[1].children[0].textContent,'<img src=x onerror=alert(1)>')});
+await test('Pagination returns every matching member once, including duplicate names',async()=>{const d=JSON.parse(disk.get('sofia_member_demo_db_v1'));for(let i=0;i<25;i++)d['members/'+(30000000+i)]={ownerId:'page-'+i,displayName:'Page Friend',searchName:'page friend'};disk.set('sofia_member_demo_db_v1',JSON.stringify(d));await search('page');assert.equal(get('searchResults').children.length,20);assert.equal(get('loadMore').hidden,false);get('loadMore').events.click();await tick();assert.equal(get('searchResults').children.length,25);assert.equal(new Set(get('searchResults').children.map(n=>n.href)).size,25);assert.equal(get('loadMore').hidden,true)});
+await test('Private member profile shows no book link or title to another user',async()=>{await sdk.signInWithEmailAndPassword(auth,'sofia@demo.local','RecipeDemo2026!');elements.clear();ctx.location.search='?id=10000002';run(fs.readFileSync('dist/member-profile.js','utf8'));await tick();assert.equal(get('profileName').textContent,'料理朋友');assert.equal(get('sharedBook').hidden,true);assert.equal(get('sharedBookLink').href,undefined);assert.match(get('profileMessage').textContent,/私人/)});
+await test('Shared member profile exposes only a reading link',async()=>{await sdk.signInWithEmailAndPassword(auth,'friend@demo.local','RecipeDemo2026!');elements.clear();ctx.location.search='?id=10000001';run(fs.readFileSync('dist/member-profile.js','utf8'));await tick();assert.equal(get('sharedBook').hidden,false);assert.equal(get('sharedBookLink').href,'./book.html?owner=founder');assert.match(get('profileMessage').textContent,/只供閱讀/)});
+await test('Revoking sharing hides an already-open profile book immediately',async()=>{const d=JSON.parse(disk.get('sofia_member_demo_db_v1'));d['books/founder'].visibility='private';disk.set('sofia_member_demo_db_v1',JSON.stringify(d));await sdk.runTransaction({},async()=>{});await tick();assert.equal(get('sharedBook').hidden,true);assert.equal(get('sharedTitle').textContent,'');assert.equal(get('sharedBookLink').href,undefined)});
+await test('Logout clears protected results and redirects',async()=>{await sdk.signOut();await tick();assert.equal(redirect,true);assert.equal(get('profileContent').hidden,true);assert.equal(get('sharedBook').hidden,true)});
+console.log('All '+count+' discovery checks passed with isolated fixtures. No live Firebase calls.');
