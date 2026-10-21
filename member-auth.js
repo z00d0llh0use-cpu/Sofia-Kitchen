@@ -34,5 +34,6 @@
   M.init().then(async()=>{
     if(page!=='forgot'&&!busy){const user=await M.session();if(user&&!busy)location.replace('./index.html');}
     button.disabled=false;
+    if(Member.state.sdk.demo){M.$('demoHelp').hidden=false;}
   }).catch(error=>M.message('authMessage',M.errorText(error),true));
 })();
