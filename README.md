@@ -30,3 +30,4 @@
 正式會員版需要 Firebase Authentication、Firestore 與已驗證的資料庫規則。
 
 GitHub 的公開倉庫會公開這些前端程式碼。本包不含正式食譜備份、服務帳戶私鑰或正式 Firebase 連線設定。
+更新網站預覽
