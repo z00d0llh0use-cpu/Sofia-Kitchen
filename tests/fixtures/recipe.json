@@ -1,0 +1,27 @@
+{
+  "format": "sofia-recipes",
+  "version": 1,
+  "exportedAt": "2026-10-21T03:39:07.617Z",
+  "recipes": [
+    {
+      "id": "my-tomato-eggs-001",
+      "title": "番茄炒蛋",
+      "category": "chinese",
+      "time": "15 分鐘",
+      "mood": "家常料理",
+      "emoji": "🍅",
+      "imageUrl": "",
+      "ingredients": [
+        "番茄 2 顆",
+        "雞蛋 3 顆",
+        "鹽 適量"
+      ],
+      "prePrep": "番茄洗淨切塊；雞蛋打散。",
+      "steps": [
+        "熱鍋加油，炒蛋後盛起。",
+        "炒軟番茄，加入雞蛋與鹽拌勻。"
+      ],
+      "tip": "喜歡多一點醬汁，可以加少量水。"
+    }
+  ]
+}

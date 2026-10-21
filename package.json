@@ -1,0 +1,22 @@
+{
+  "name": "sofia-kitchen",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node tests/assets.mjs && node tests/accounts.mjs && node tests/book.mjs && node tests/discovery.mjs && node tests/deployment.mjs",
+    "test:rules": "firebase emulators:exec --only firestore --project demo-sofia-members --config firebase.emulators.json \"node --test tests/firestore.rules.test.mjs\"",
+    "verify:artifact": "node scripts/verify-artifact.mjs"
+  },
+  "devDependencies": {
+    "firebase": "13.0.0",
+    "firebase-tools": "15.34.0",
+    "@firebase/rules-unit-testing": "6.0.0",
+    "google-auth-library": "10.6.1"
+  },
+  "packageManager": "pnpm@11.25.0"
+}

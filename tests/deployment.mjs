@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import {rollbackDecision} from '../scripts/rollback-decision.mjs';
+const previous={release:{name:'old-release',version:{name:'old-version'}}};
+const current={release:{name:'this-release',version:{name:'new-version'},message:'commit abc; https://github.com/repo/actions/runs/1'}};
+assert.equal(rollbackDecision({previous,current:previous}),'unchanged');
+assert.equal(rollbackDecision({previous,current,ours:{release:'this-release'},commit:'abc'}),'rollback');
+assert.equal(rollbackDecision({previous,current,commit:'abc'}),'rollback');
+assert.throws(()=>rollbackDecision({previous,current,ours:{release:'different-release'},commit:'abc'}));
+assert.throws(()=>rollbackDecision({previous,current,commit:'ab'}));
+assert.throws(()=>rollbackDecision({previous,current}));
+const config=JSON.parse(fs.readFileSync('firebase.json'));assert.equal(config.hosting.public,'dist');assert.equal(config.hosting.site,'sofia-kitchen001');
+assert.deepEqual(config.hosting.headers,[{source:'**',headers:[{key:'Cache-Control',value:'no-cache'}]}]);
+const workflow=fs.readFileSync('.github/workflows/firebase-hosting.yml','utf8');assert.match(workflow,/--only hosting/);assert.doesNotMatch(workflow,/--only firestore|firebase deploy\s+--project/);
+assert.match(workflow,/needs: verify/);assert.match(workflow,/actions\/download-artifact/);assert.match(workflow,/id-token: write/);
+console.log('PASS rollback identity checks, Hosting-only scope and tested-artifact deployment guards.');
