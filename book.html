@@ -1,0 +1,2132 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Kitchen ✦ 靈動食譜手札</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Noto+Serif+TC:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        :root {
+            --paper-cream: #fffcf5;
+            --paper-warm: #f9f1e1;
+            --paper-edge: #e5d5b7;
+            --bark-dark: #432818;
+            --bark-mid: #6f4518;
+            --bark-light: #99582a;
+            --accent-rose: #e07a5f;
+            --accent-berry: #d65780;
+            --accent-butter: #f2cc8f;
+            --accent-sage: #81b29a;
+            --ink-dark: #3d2c2e;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: #ffffff;
+            background-image: 
+                radial-gradient(#f3e8ee 1.2px, transparent 1.2px),
+                radial-gradient(#fdf6f0 1.2px, #ffffff 1.2px);
+            background-size: 48px 48px;
+            background-position: 0 0, 24px 24px;
+            font-family: 'Noto Serif TC', serif;
+            color: var(--ink-dark);
+            overflow-x: hidden;
+        }
+
+        .font-hand {
+            font-family: 'Caveat', cursive;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-12px) rotate(8deg) scale(1.08); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.9; transform: scale(1) rotate(0deg); }
+            50% { opacity: 0.3; transform: scale(0.78) rotate(-15deg); }
+        }
+
+        .star-float {
+            animation: floatSlow 4.8s ease-in-out infinite;
+        }
+
+        .star-twinkle {
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        /* Realistic Brown Tree Bark Texture for Closed Book Cover with deep shadows */
+        .bark-texture {
+            background-color: #583520;
+            background-image:
+                repeating-linear-gradient(
+                    86deg,
+                    rgba(34, 17, 7, 0.42) 0px,
+                    rgba(34, 17, 7, 0.42) 2px,
+                    transparent 2px,
+                    transparent 7px,
+                    rgba(120, 74, 42, 0.28) 7px,
+                    rgba(120, 74, 42, 0.28) 11px
+                ),
+                repeating-linear-gradient(
+                    94deg,
+                    rgba(25, 12, 4, 0.36) 0px,
+                    rgba(25, 12, 4, 0.36) 3px,
+                    transparent 3px,
+                    transparent 12px
+                ),
+                radial-gradient(ellipse at 25% 30%, rgba(164, 106, 62, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 75%, rgba(42, 20, 9, 0.6) 0%, transparent 65%),
+                linear-gradient(135deg, #6e4226 0%, #4b2c17 50%, #3a2010 100%);
+            box-shadow: 
+                inset 0 0 45px rgba(20, 9, 2, 0.8),
+                inset 6px 0 16px rgba(255, 224, 185, 0.18),
+                22px 32px 55px rgba(35, 18, 8, 0.45),
+                6px 12px 24px rgba(35, 18, 8, 0.3);
+            position: relative;
+        }
+
+        .bark-grain::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.04 0.35' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.18'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* Warm Cream Paper Texture for Open Pages (No Bark) */
+        .paper-texture {
+            background-color: var(--paper-cream);
+            background-image: 
+                radial-gradient(at 15% 15%, rgba(255, 238, 215, 0.5) 0px, transparent 50%),
+                radial-gradient(at 85% 85%, rgba(246, 218, 198, 0.4) 0px, transparent 50%),
+                repeating-linear-gradient(0deg, rgba(218, 190, 156, 0.07) 0px, rgba(218, 190, 156, 0.07) 1px, transparent 1px, transparent 28px);
+            box-shadow: 
+                inset 0 0 25px rgba(138, 90, 68, 0.06),
+                0 15px 35px rgba(58, 32, 16, 0.18);
+        }
+
+        .spine-shadow-left::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(90deg, transparent 78%, rgba(138, 96, 62, 0.06) 91%, rgba(92, 58, 33, 0.16) 100%);
+            border-radius: inherit;
+        }
+
+        .spine-shadow-right::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(270deg, transparent 78%, rgba(138, 96, 62, 0.06) 91%, rgba(92, 58, 33, 0.16) 100%);
+            border-radius: inherit;
+        }
+
+        .perspective-stage {
+            perspective: 2400px;
+        }
+
+        @keyframes pageTurnNext {
+            0% { opacity: 1; transform: perspective(2000px) rotateY(0deg) skewY(0deg); }
+            45% { opacity: 1; transform: perspective(2000px) rotateY(-92deg) skewY(-2.5deg); }
+            100% { opacity: 0; transform: perspective(2000px) rotateY(-180deg) skewY(0deg); }
+        }
+
+        @keyframes pageTurnPrev {
+            0% { opacity: 1; transform: perspective(2000px) rotateY(-180deg) skewY(0deg); }
+            45% { opacity: 1; transform: perspective(2000px) rotateY(-88deg) skewY(2.5deg); }
+            100% { opacity: 0; transform: perspective(2000px) rotateY(0deg) skewY(0deg); }
+        }
+
+        .animate-turn-next {
+            display: block !important;
+            transform-origin: left center;
+            animation: pageTurnNext 0.62s cubic-bezier(0.55, 0.06, 0.32, 0.98) forwards;
+        }
+
+        .animate-turn-prev {
+            display: block !important;
+            transform-origin: left center;
+            animation: pageTurnPrev 0.62s cubic-bezier(0.55, 0.06, 0.32, 0.98) forwards;
+        }
+
+        .book-stack-left {
+            background: repeating-linear-gradient(
+                90deg,
+                #fdf9f0 0px,
+                #e8d8be 1.5px,
+                #fcf6ea 3px,
+                #dcc7a6 4.5px
+            );
+            box-shadow: -10px 16px 30px rgba(58, 32, 16, 0.28);
+            border-radius: 18px 0 0 18px;
+        }
+
+        .book-stack-right {
+            background: repeating-linear-gradient(
+                90deg,
+                #dcc7a6 0px,
+                #fcf6ea 1.5px,
+                #e8d8be 3px,
+                #fdf9f0 4.5px
+            );
+            box-shadow: 14px 18px 32px rgba(58, 32, 16, 0.28);
+            border-radius: 0 18px 18px 0;
+        }
+
+        .wavy-paper-card {
+            position: relative;
+            border-radius: 22px 18px 24px 16px;
+            box-shadow: 
+                0 6px 20px -4px rgba(138, 90, 68, 0.12),
+                inset 0 0 0 1.5px rgba(219, 184, 152, 0.6);
+        }
+
+        .toc-dots {
+            flex: 1;
+            border-bottom: 2px dotted #d5b99b;
+            margin: 0 10px;
+            position: relative;
+            top: -4px;
+        }
+
+        .washi-tape {
+            background: rgba(247, 202, 201, 0.7);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            border-left: 2px dashed rgba(255,255,255,0.75);
+            border-right: 2px dashed rgba(255,255,255,0.75);
+        }
+
+        .recipe-scroll::-webkit-scrollbar {
+            width: 5px;
+        }
+        .recipe-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .recipe-scroll::-webkit-scrollbar-thumb {
+            background: #dec5ab;
+            border-radius: 999px;
+        }
+
+        /* ==================== SOFIA'S HAND-DRAWN LINE CLOCK STYLES ==================== */
+        .doodle-clock-btn {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(3px 5px 0px rgba(67, 40, 24, 0.16));
+        }
+
+        .doodle-clock-btn:hover {
+            transform: scale(1.06) rotate(-3deg);
+        }
+
+        /* Active ticking subtle pulse */
+        @keyframes clockTickBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        .clock-ticking {
+            animation: clockTickBeat 1s ease-in-out infinite;
+        }
+
+        /* Vigorous alarm clock swinging when time is up */
+        @keyframes clockAlarmSwing {
+            0%   { transform: translateY(0) rotate(0deg) scale(1.05); }
+            10%  { transform: translateY(-6px) rotate(-16deg) scale(1.08); }
+            20%  { transform: translateY(-4px) rotate(16deg) scale(1.08); }
+            30%  { transform: translateY(-7px) rotate(-18deg) scale(1.08); }
+            40%  { transform: translateY(-4px) rotate(18deg) scale(1.08); }
+            50%  { transform: translateY(-6px) rotate(-14deg) scale(1.08); }
+            60%  { transform: translateY(-3px) rotate(14deg) scale(1.08); }
+            70%  { transform: translateY(-5px) rotate(-10deg) scale(1.06); }
+            80%  { transform: translateY(-2px) rotate(10deg) scale(1.06); }
+            90%  { transform: translateY(-3px) rotate(-6deg) scale(1.05); }
+            100% { transform: translateY(0) rotate(0deg) scale(1.05); }
+        }
+
+        @keyframes hammerRing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-28deg); }
+            75% { transform: rotate(28deg); }
+        }
+
+        .clock-ringing-swing {
+            animation: clockAlarmSwing 0.65s ease-in-out infinite !important;
+            filter: drop-shadow(0 0 14px rgba(225, 29, 72, 0.35));
+        }
+
+        .clock-ringing-swing #clockHammer {
+            transform-origin: 60px 22px;
+            animation: hammerRing 0.12s linear infinite;
+        }
+
+        .clock-hand {
+            transform-origin: 60px 68px;
+            transition: transform 0.25s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+        }
+    </style>
+    <style>
+      .cloud-readonly [data-cloud-edit]{display:none!important}
+      .cloud-saving [data-cloud-edit]{pointer-events:none;opacity:.5}
+      label:has(#inputImageFile){display:none!important}
+      #cloudLogoutBtn[hidden],#cloudLoginBtn[hidden]{display:none!important}
+    </style>
+<style>[hidden]{display:none!important}.demo-banner{background:#754b30;color:white;padding:8px;text-align:center;font:12px sans-serif}.demo-mode #bookWorkspace{padding-top:4px}</style>
+<script src="./demo-sdk.js"></script></head>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-rose-200 selection:text-stone-900 cloud-readonly">
+    <div id="sessionGate" style="max-width:680px;margin:80px auto;padding:24px;text-align:center" role="status">正在確認登入…</div><div id="bookWorkspace" hidden>
+
+    <div id="starryBackgroundContainer" class="fixed inset-0 pointer-events-none overflow-hidden z-0 transition-opacity duration-500" aria-hidden="true">
+        <!-- Full Screen Dense Scattered Stars when Closed -->
+        <div id="denseStarsGroup">
+            <svg class="absolute top-6 left-12 w-16 h-16 text-amber-400/85 star-float" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 4 C54 34 66 46 96 50 C66 54 54 66 50 96 C46 66 34 54 4 50 C34 46 46 34 50 4 Z" />
+            </svg>
+            <svg class="absolute top-20 left-1/4 w-8 h-8 text-rose-400/80 star-twinkle" style="animation-delay: 0.5s;" viewBox="0 0 100 100" fill="currentColor">
+                <polygon points="50,5 64,36 98,38 71,60 80,94 50,75 20,94 29,60 2,38 36,36" />
+            </svg>
+            <svg class="absolute top-12 right-1/4 w-12 h-12 text-pink-400/80 star-float" style="animation-delay: 1.1s;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5">
+                <polygon points="50,8 63,38 95,41 70,62 78,93 50,76 22,93 30,62 5,41 37,38" />
+            </svg>
+            <svg class="absolute top-24 right-10 w-14 h-14 text-amber-300/85 star-twinkle" style="animation-delay: 1.8s;" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 0 C53 38 62 47 100 50 C62 53 53 62 50 100 C47 62 38 53 0 50 C38 47 47 38 50 0 Z" />
+            </svg>
+            
+            <div class="absolute top-1/3 left-8 hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-rose-50/90 border border-rose-200 text-rose-600 font-hand text-lg rotate-[-8deg] shadow-sm">
+                <span>✦ Sofia's Secret Magic ✦</span>
+            </div>
+            <div class="absolute top-1/3 right-10 hidden md:flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-50/90 border border-amber-200 text-amber-800 font-hand text-lg rotate-[7deg] shadow-sm">
+                <span>★ Sweet & Cozy Moments</span>
+            </div>
+
+            <svg class="absolute bottom-16 left-16 w-12 h-12 text-amber-500/75 star-float" style="animation-delay: 0.8s;" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 6 C54 34 66 46 94 50 C66 54 54 66 50 94 C46 66 34 54 6 50 C34 46 46 34 50 6 Z" />
+            </svg>
+            <svg class="absolute bottom-28 right-20 w-14 h-14 text-rose-400/75 star-twinkle" style="animation-delay: 2.2s;" viewBox="0 0 100 100" fill="currentColor">
+                <polygon points="50,5 64,36 98,38 71,60 80,94 50,75 20,94 29,60 2,38 36,36" />
+            </svg>
+        </div>
+
+        <!-- Four Corner Stars when Open -->
+        <div id="cornerStarsGroup" class="hidden">
+            <svg class="absolute top-6 left-6 w-10 h-10 text-amber-400/80 star-float" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 4 C54 34 66 46 96 50 C66 54 54 66 50 96 C46 66 34 54 4 50 C34 46 46 34 50 4 Z" />
+            </svg>
+            <svg class="absolute top-6 right-6 w-10 h-10 text-rose-400/80 star-twinkle" style="animation-delay: 0.6s;" viewBox="0 0 100 100" fill="currentColor">
+                <polygon points="50,5 64,36 98,38 71,60 80,94 50,75 20,94 29,60 2,38 36,36" />
+            </svg>
+            <svg class="absolute bottom-6 left-6 w-10 h-10 text-pink-400/80 star-twinkle" style="animation-delay: 1.4s;" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 6 C54 34 66 46 94 50 C66 54 54 66 50 94 C46 66 34 54 6 50 C34 46 46 34 50 6 Z" />
+            </svg>
+            <svg class="absolute bottom-6 right-6 w-10 h-10 text-amber-400/80 star-float" style="animation-delay: 2s;" viewBox="0 0 100 100" fill="currentColor">
+                <path d="M50 0 C53 38 62 47 100 50 C62 53 53 62 50 100 C47 62 38 53 0 50 C38 47 47 38 50 0 Z" />
+            </svg>
+        </div>
+    </div>
+
+    <header class="relative z-20 w-full max-w-6xl mx-auto px-4 pt-4 pb-2 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full border border-stone-200/90 shadow-md">
+            <span class="text-rose-500 text-lg animate-spin" style="animation-duration: 9s;">✦</span>
+            <span class="font-bold tracking-wider text-stone-800 text-sm sm:text-base">SOFIA KITCHEN</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 font-medium" id="activeBookTitle">料理手札</span>
+        </div>
+
+        <div class="flex items-center flex-wrap gap-2">
+            <button type="button" onclick="backToMemberHome()" class="px-3 py-2 rounded-full bg-white border border-stone-200 text-xs shadow-sm">← 回首頁</button>
+            <button id="btnToggleBookState" onclick="toggleBookCover()" class="px-3.5 py-2 rounded-full bg-amber-900 text-amber-50 hover:bg-amber-800 transition-all text-xs sm:text-sm font-medium flex items-center gap-1.5 shadow-md cursor-pointer">
+                <i class="fa-solid fa-book-open"></i>
+                <span id="toggleBookStateText">翻開食譜書</span>
+            </button>
+
+            <button id="btnGoMenu" onclick="goToMenuSpread()" class="hidden px-3.5 py-2 rounded-full bg-white hover:bg-rose-50 text-stone-700 border border-stone-200 transition-all text-xs sm:text-sm font-medium items-center gap-1.5 shadow-md cursor-pointer">
+                <i class="fa-solid fa-list-ol text-rose-500"></i>
+                <span>返回目錄首頁</span>
+            </button>
+
+            <button data-cloud-edit onclick="openRecipeModal()" class="px-4 py-2 rounded-full bg-gradient-to-r from-rose-400 to-amber-400 hover:from-rose-500 hover:to-amber-500 text-white transition-all text-xs sm:text-sm font-semibold flex items-center gap-1.5 shadow-md hover:shadow-lg cursor-pointer">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span>＋ 新增專屬菜譜</span>
+            </button>
+
+            <button type="button" onclick="openDataManager()" class="px-4 py-2 rounded-full bg-white text-amber-900 border border-amber-300 shadow-md text-xs sm:text-sm font-semibold cursor-pointer">↥↧ 資料匯入／匯出</button>
+            <button type="button" id="cloudLogoutBtn" onclick="logoutCloud()" class="px-4 py-2 rounded-full bg-white text-stone-700 border border-stone-200 text-xs sm:text-sm shadow-md cursor-pointer">登出</button>
+            <button id="btnSoundToggle" onclick="toggleSound()" title="翻頁音效開關" class="w-9 h-9 rounded-full bg-white border border-stone-200 text-stone-600 hover:text-rose-500 flex items-center justify-center shadow-md transition-colors cursor-pointer">
+                <i id="soundIcon" class="fa-solid fa-volume-high text-xs"></i>
+            </button>
+        </div>
+    </header>
+    <div class="max-w-6xl mx-auto px-4 text-xs text-stone-500" role="status" id="dataStatus">正在連接 Firebase…</div>
+    <div id="cloudAccount" class="max-w-6xl mx-auto px-4 mt-1 text-xs text-stone-500">正在載入會員資料…</div>
+    <input id="recipeImportFile" type="file" accept=".json,application/json" hidden onchange="readImportFile(event)">
+    <dialog id="dataManager" aria-labelledby="dataManagerTitle" style="width:min(720px,94vw);max-height:90vh;border:1px solid #e5d5b7;border-radius:22px;padding:24px;background:#fffcf5;color:#3d2c2e;overflow:auto;box-shadow:0 20px 80px #43281833;">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:center"><h2 id="dataManagerTitle" style="font-size:20px;font-weight:900">食譜資料匯入／匯出</h2><button type="button" onclick="document.getElementById('dataManager').close()" aria-label="關閉資料管理" style="padding:8px 12px">✕</button></div>
+      <p style="font-size:13px;margin:12px 0;line-height:1.8">這是目前選取食譜本的資料。只有擁有者可以修改或匯入；其他會員只能閱讀已分享的食譜。圖片目前使用網址。</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0">
+        <button type="button" onclick="exportRecipes()" class="data-button">匯出目前食譜 JSON</button>
+        <button type="button" onclick="downloadImportTemplate()" class="data-button">下載格式範本</button>
+        <button type="button" data-cloud-edit onclick="if(requireCloudEditor())document.getElementById('recipeImportFile').click()" class="data-button">選取 JSON 匯入</button>
+        <button type="button" id="undoImportBtn" onclick="undoLastImport()" class="data-button" hidden>復原上一次匯入</button>
+      </div>
+      <button id="migrateLegacyButton" type="button" hidden onclick="migrateLegacyRecipes()" class="data-button">移轉我的舊版食譜</button>
+      <p id="dataManagerMessage" role="status" style="white-space:pre-wrap;font-size:13px;line-height:1.8"></p>
+      <section id="importPreview" hidden style="margin-top:16px;border-top:1px dashed #e5d5b7;padding-top:16px">
+        <h3 style="font-weight:800">匯入預覽（確認前不修改任何食譜）</h3>
+        <p id="importFileSummary" style="font-size:13px;margin:8px 0;overflow-wrap:anywhere"></p>
+        <label for="importMode" style="font-size:13px">遇到重複 ID 時：</label>
+        <select id="importMode" onchange="updateImportPreview()" style="padding:8px;border:1px solid #e5d5b7;border-radius:8px;max-width:100%;background:white">
+          <option value="skip">僅新增：同 ID 的食譜保留原內容</option>
+          <option value="update">合併更新：同 ID 的食譜使用匯入內容</option>
+          <option value="replace">整本取代：只保留這個檔案的食譜</option>
+        </select>
+        <p id="importCounts" style="font-size:13px;margin:10px 0;font-weight:700"></p>
+        <ul id="importTitles" style="list-style:disc;padding-left:22px;font-size:13px;line-height:1.8"></ul>
+        <label id="replaceConsentLabel" hidden style="font-size:13px;margin-top:12px"><input id="replaceConsent" type="checkbox"> 我了解整本取代會移除原有但不在檔案中的食譜。</label>
+        <p style="font-size:12px;color:#6f4518;margin:12px 0">確認匯入時，會先下載一份「匯入前備份」。請保留下載檔；本頁開啟期間，且雲端沒有再被修改時，也可復原上一次匯入。</p>
+        <button type="button" id="applyImportBtn" onclick="applyRecipeImport()" class="data-button">確認匯入</button>
+        <button type="button" onclick="cancelRecipeImport()" class="data-button">取消這次匯入</button>
+      </section>
+      <details style="margin-top:18px;font-size:13px;line-height:1.8"><summary style="cursor:pointer;font-weight:700">格式與保存提醒</summary><p>分類：chinese 中式、western 西式、dessert 甜品、drink 飲品。ingredients 和 steps 是文字陣列。id 是識別碼，與名稱不同；改名稱不需要改 id。匯入接受 version 1 的 sofia-recipes 格式，也相容舊版純食譜陣列。沒有 id 時會自動產生。缺少 prePrep 時保持空白，不會拆走原本的料理步驟。</p><p>食譜本最多 2,000 道；一次最多變更 400 道。每道內容需小於 800 KiB。暫不接受內嵌圖片，請填寫圖片網址。匯入失敗不會部分保存；請保持網路連線。</p></details>
+    </dialog>
+    <style>dialog::backdrop{background:#43281866;backdrop-filter:blur(3px)}.data-button{padding:9px 14px;border:1px solid #e5d5b7;border-radius:12px;background:white;color:#6f4518;font-size:13px;cursor:pointer}.data-button:hover{background:#f9f1e1}.data-button:disabled{opacity:.5;cursor:wait}#dataManager *{user-select:text}</style>
+
+    <!-- ==================== SOFIA'S HAND-DRAWN LINE-ART CLOCK TIMER (簡筆畫線條時鐘計時器) ==================== -->
+    <section class="relative z-30 w-full max-w-6xl mx-auto px-4 pt-1 pb-1 flex justify-center sm:justify-end">
+        <div class="relative inline-flex items-center group">
+            
+            <!-- Left Whisper Hint / Stop Music Button -->
+            <div class="mr-3 flex flex-col items-end">
+                <button id="btnStopClockAlarm" onclick="stopTimerAlarm()" class="hidden mb-1 px-3.5 py-1 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold shadow-md items-center gap-1.5 cursor-pointer animate-bounce">
+                    <i class="fa-solid fa-bell-slash"></i>
+                    <span>停止響鈴擺動</span>
+                </button>
+                <div onclick="openTimerModal()" class="cursor-pointer text-right">
+                    <span id="clockTaskHint" class="block font-hand text-base sm:text-lg text-stone-700 group-hover:text-rose-500 transition-colors leading-tight">
+                        ✦ Click clock to timer!
+                    </span>
+                    <span id="clockSubStatus" class="block text-[11px] text-stone-400 group-hover:text-stone-600 transition-colors">
+                        點擊簡筆畫時鐘設定倒數計時
+                    </span>
+                </div>
+            </div>
+
+            <!-- Hand-Drawn Line-Art Clock Wrapper -->
+            <div class="relative">
+                
+                <!-- TOP-RIGHT REMAINING TIME BADGE (計時器右上方顯示剩餘時間) -->
+                <div id="clockTopRightBadge" onclick="openTimerModal()" 
+                     class="hidden absolute -top-2.5 -right-12 z-20 px-2.5 py-0.5 rounded-full bg-[#fffcf5] border-2 border-[#3d2c2e] shadow-[2px_2px_0px_#3d2c2e] cursor-pointer items-center gap-1 transform rotate-[6deg] hover:scale-105 transition-transform">
+                    <span id="clockBadgeDot" class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-ping"></span>
+                    <span id="clockRemainingText" class="font-mono font-extrabold text-xs sm:text-sm text-[#3d2c2e] tracking-tight">03:00</span>
+                </div>
+
+                <!-- Idle Sparkle Star at Top-Right when no timer is set -->
+                <div id="clockIdleStar" class="pointer-events-none absolute -top-1 -right-2 text-amber-400 text-sm star-twinkle">
+                    ✦
+                </div>
+
+                <!-- Main Clickable Hand-Drawn Line Clock SVG -->
+                <button id="doodleClockWidget" onclick="handleClockClick()" type="button" 
+                        title="點擊選擇計時時間"
+                        class="doodle-clock-btn relative w-20 h-22 sm:w-24 sm:h-26 flex items-center justify-center cursor-pointer focus:outline-none">
+                    <svg viewBox="0 0 120 130" class="w-full h-full overflow-visible" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Soft Cream Paper Fill inside Clock with slight hand-drawn offset -->
+                        <circle cx="62" cy="70" r="39" fill="#fffcf5" />
+                        <circle cx="60" cy="68" r="38" fill="#fff9eb" stroke="#3d2c2e" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="180 4 90 3" />
+                        
+                        <!-- Inner Sketch Ring -->
+                        <circle cx="60" cy="68" r="32" stroke="#3d2c2e" stroke-width="1.2" stroke-dasharray="3 5" opacity="0.45" />
+
+                        <!-- Left Alarm Bell (手繪左耳鈴鐺) -->
+                        <path d="M24 38 C16 29, 28 17, 39 25 C43 28, 41 34, 36 37 Z" fill="#ffe4e6" stroke="#3d2c2e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                        <line x1="33" y1="36" x2="39" y2="42" stroke="#3d2c2e" stroke-width="2.4" stroke-linecap="round" />
+
+                        <!-- Right Alarm Bell (手繪右耳鈴鐺) -->
+                        <path d="M96 38 C104 29, 92 17, 81 25 C77 28, 79 34, 84 37 Z" fill="#ffe4e6" stroke="#3d2c2e" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                        <line x1="87" y1="36" x2="81" y2="42" stroke="#3d2c2e" stroke-width="2.4" stroke-linecap="round" />
+
+                        <!-- Top Center Hammer (時間到會敲擊的小槌子) -->
+                        <g id="clockHammer">
+                            <line x1="60" y1="30" x2="60" y2="17" stroke="#3d2c2e" stroke-width="2.5" stroke-linecap="round" />
+                            <path d="M53 16 Q60 13 67 16" stroke="#e07a5f" stroke-width="3.5" stroke-linecap="round" />
+                        </g>
+
+                        <!-- Cute Little Clock Feet (手繪小腳) -->
+                        <path d="M36 101 L28 114" stroke="#3d2c2e" stroke-width="2.8" stroke-linecap="round" />
+                        <path d="M84 101 L92 114" stroke="#3d2c2e" stroke-width="2.8" stroke-linecap="round" />
+
+                        <!-- 12 Clock Face Hour Marks & Numbers -->
+                        <text x="60" y="44" text-anchor="middle" fill="#3d2c2e" font-size="8" font-weight="bold" font-family="serif">12</text>
+                        <text x="87" y="71" text-anchor="middle" fill="#3d2c2e" font-size="8" font-weight="bold" font-family="serif">3</text>
+                        <text x="60" y="96" text-anchor="middle" fill="#3d2c2e" font-size="8" font-weight="bold" font-family="serif">6</text>
+                        <text x="33" y="71" text-anchor="middle" fill="#3d2c2e" font-size="8" font-weight="bold" font-family="serif">9</text>
+
+                        <!-- Subtle Tick Dots -->
+                        <circle cx="74" cy="44" r="1.2" fill="#3d2c2e" />
+                        <circle cx="84" cy="54" r="1.2" fill="#3d2c2e" />
+                        <circle cx="84" cy="82" r="1.2" fill="#3d2c2e" />
+                        <circle cx="74" cy="92" r="1.2" fill="#3d2c2e" />
+                        <circle cx="46" cy="92" r="1.2" fill="#3d2c2e" />
+                        <circle cx="36" cy="82" r="1.2" fill="#3d2c2e" />
+                        <circle cx="36" cy="54" r="1.2" fill="#3d2c2e" />
+                        <circle cx="46" cy="44" r="1.2" fill="#3d2c2e" />
+
+                        <!-- Tiny Blush Cheeks on Clock Face -->
+                        <ellipse cx="43" cy="74" rx="4.5" ry="2.5" fill="#fda4af" opacity="0.55" />
+                        <ellipse cx="77" cy="74" rx="4.5" ry="2.5" fill="#fda4af" opacity="0.55" />
+
+                        <!-- HOUR HAND (時針 - 隨計時推進轉動) -->
+                        <g id="clockHourHand" class="clock-hand" style="transform: rotate(0deg);">
+                            <line x1="60" y1="68" x2="60" y2="51" stroke="#3d2c2e" stroke-width="3.2" stroke-linecap="round" />
+                        </g>
+
+                        <!-- MINUTE HAND (分針 - 每分每秒真實轉動) -->
+                        <g id="clockMinuteHand" class="clock-hand" style="transform: rotate(60deg);">
+                            <line x1="60" y1="68" x2="60" y2="43" stroke="#3d2c2e" stroke-width="2.2" stroke-linecap="round" />
+                        </g>
+
+                        <!-- SECOND HAND (秒針 - 每秒靈動跳動) -->
+                        <g id="clockSecondHand" class="clock-hand" style="transform: rotate(180deg);">
+                            <line x1="60" y1="73" x2="60" y2="40" stroke="#e11d48" stroke-width="1.4" stroke-linecap="round" />
+                            <circle cx="60" cy="40" r="2" fill="#e11d48" />
+                        </g>
+
+                        <!-- Center Pin -->
+                        <circle cx="60" cy="68" r="3.2" fill="#3d2c2e" />
+                        <circle cx="60" cy="68" r="1.4" fill="#fffcf5" />
+
+                        <!-- Doodle Sparkles around Clock -->
+                        <path d="M12 52 Q16 52 16 48 Q16 52 20 52 Q16 52 16 56 Q16 52 12 52" fill="#f59e0b" />
+                        <path d="M103 60 Q106 60 106 57 Q106 60 109 60 Q106 60 106 63 Q106 60 103 60" fill="#f43f5e" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <main class="relative z-10 flex-1 flex flex-col items-center justify-center px-3 sm:px-6 py-2 perspective-stage">
+
+        <!-- ==================== STATE 1: CLOSED BROWN TREE-BARK BOOK (OPTION A POLAROID) ==================== -->
+        <div id="closedBookContainer" class="flex flex-col items-center justify-center my-auto transition-all duration-700">
+
+            <div onclick="openBookFromCover()" class="group relative w-[320px] sm:w-[395px] h-[465px] sm:h-[545px] cursor-pointer transition-transform duration-500 hover:-translate-y-2 hover:rotate-[-1deg]">
+                
+                <!-- Realistic Book Pages Stack on Right & Bottom -->
+                <div class="absolute top-3 bottom-3 -right-3.5 w-6 rounded-r-xl bg-gradient-to-r from-[#e7d4b5] via-[#fdf9f0] to-[#d9c29f] shadow-lg border-y border-r border-amber-900/30"></div>
+                <div class="absolute -bottom-2.5 left-4 right-0 h-4 rounded-b-xl bg-gradient-to-b from-[#dfd0b8] to-[#cbb593] border-x border-b border-amber-950/30"></div>
+
+                <!-- Cute Bookmark Ribbon hanging out -->
+                <div class="absolute -bottom-9 left-20 w-7 h-12 bg-rose-500 shadow-md transition-transform group-hover:translate-y-1" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);"></div>
+
+                <!-- Main Brown Tree-Bark Hardcover with Deep Shadow -->
+                <div class="bark-texture bark-grain w-full h-full rounded-r-3xl rounded-l-md p-6 sm:p-8 flex flex-col justify-between relative overflow-hidden border border-amber-950/80 z-10">
+                    
+                    <!-- Book Spine Indentation -->
+                    <div class="absolute top-0 bottom-0 left-0 w-9 bg-gradient-to-r from-black/50 via-amber-950/35 to-transparent border-r-2 border-amber-200/15"></div>
+                    <div class="absolute top-0 bottom-0 left-9 w-1.5 bg-black/30"></div>
+
+                    <!-- Top Cover Ornament -->
+                    <div class="pl-5 flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-full bg-amber-100/15 border border-amber-200/30 text-amber-100 text-xs tracking-widest font-hand">
+                            ✦ SOFIA'S EDITION ✦
+                        </span>
+                        <div class="flex items-center gap-1 text-amber-300">
+                            <i class="fa-solid fa-star text-xs star-twinkle"></i>
+                            <i class="fa-solid fa-star text-sm"></i>
+                            <i class="fa-solid fa-star text-xs star-twinkle" style="animation-delay: 1s;"></i>
+                        </div>
+                    </div>
+
+                    <!-- OPTION A: Polaroid Photo & Journal Frame -->
+                    <div id="coverStyleContent" class="ml-4 my-auto">
+                        <div class="bg-[#fffcf5] rounded-2xl p-4 sm:p-5 shadow-2xl border-2 border-amber-200/90 relative transform rotate-[-1.5deg] group-hover:rotate-0 transition-transform duration-500">
+                            <div class="washi-tape absolute -top-3.5 left-1/2 -translate-x-1/2 w-28 h-7 rotate-[2deg] rounded-sm z-20"></div>
+                            
+                            <!-- Polaroid Picture Window -->
+                            <div class="relative w-full h-36 sm:h-44 rounded-xl overflow-hidden bg-amber-50 border border-amber-200/60 shadow-inner">
+                                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80" 
+                                     alt="A Little Kitchen" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-xs text-rose-500 text-[11px] font-bold shadow-xs">
+                                    ★ Kitchen Vibe
+                                </div>
+                                <div class="absolute bottom-2 right-2.5 px-2 py-0.5 rounded-md bg-stone-900/65 text-amber-100 font-hand text-xs">
+                                    Sweet & Cozy ✦
+                                </div>
+                            </div>
+
+                            <!-- Polaroid Caption Area -->
+                            <div class="pt-3.5 pb-1 text-center relative">
+                                <h1 id="bookCoverTitle" class="text-2xl sm:text-3xl font-black text-stone-800 tracking-wide leading-tight">料理手札
+                                </h1>
+                                <p class="font-hand text-xl text-rose-500 mt-0.5">
+                                    My Recipe Diary
+                                </p>
+                                <div class="mt-2 pt-2 border-t border-dashed border-amber-300/70 flex items-center justify-center gap-2 text-[11px] text-stone-500 font-medium">
+                                    <span>🥢 中式</span>
+                                    <span>·</span>
+                                    <span>🥐 西式</span>
+                                    <span>·</span>
+                                    <span>🍰 甜品</span>
+                                    <span>·</span>
+                                    <span>🍹 飲品</span>
+                                </div>
+                            </div>
+
+                            <!-- Star Sticker on Polaroid Corner -->
+                            <div class="absolute -bottom-3 -right-3 w-10 h-10 rounded-full bg-amber-300 text-amber-950 flex items-center justify-center shadow-md rotate-12 font-bold text-lg border-2 border-white">
+                                ★
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Cover Call-To-Action -->
+                    <div class="pl-5 flex items-center justify-between text-amber-100/90 text-xs sm:text-sm">
+                        <span class="font-hand text-lg tracking-wider text-amber-200">Click to open the recipe diary ✦</span>
+                        <span class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-950 font-bold text-xs shadow-md group-hover:bg-rose-400 group-hover:text-white transition-colors">
+                            <span>翻開食譜書</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <p class="mt-6 text-stone-600 text-xs sm:text-sm flex items-center gap-2">
+                <span class="text-rose-500">✦</span>
+                <span>點擊棕色樹皮精裝書封面，即可開啟 Sofia 的美食奇幻旅程</span>
+                <span class="text-amber-500">✦</span>
+            </p>
+        </div>
+
+        <!-- ==================== STATE 2: OPEN 3D RECIPE BOOK SPREAD (WARM CREAM PAPER ONLY) ==================== -->
+        <div id="openBookContainer" class="hidden w-full max-w-6xl mx-auto flex-col items-center">
+            
+            <!-- Category Quick-Jump Tabs Above Book -->
+            <div class="w-full max-w-5xl flex items-center justify-between flex-wrap gap-2 mb-2.5 px-2">
+                <div class="flex items-center flex-wrap gap-1.5 sm:gap-2">
+                    <button onclick="goToMenuSpread()" id="tabBtn-menu" class="px-3.5 py-1.5 rounded-t-xl rounded-b-md text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 shadow-md cursor-pointer bg-stone-800 text-white">
+                        <span>📖</span>
+                        <span>目錄 Content</span>
+                    </button>
+                    <button onclick="jumpToCategory('chinese')" id="tabBtn-chinese" class="px-3.5 py-1.5 rounded-t-xl rounded-b-md text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 shadow-md cursor-pointer bg-rose-100 text-rose-700 hover:bg-rose-200">
+                        <span>🥢</span>
+                        <span>1. 中式菜譜</span>
+                    </button>
+                    <button onclick="jumpToCategory('western')" id="tabBtn-western" class="px-3.5 py-1.5 rounded-t-xl rounded-b-md text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 shadow-md cursor-pointer bg-amber-100 text-amber-800 hover:bg-amber-200">
+                        <span>🥐</span>
+                        <span>2. 西式菜譜</span>
+                    </button>
+                    <button onclick="jumpToCategory('dessert')" id="tabBtn-dessert" class="px-3.5 py-1.5 rounded-t-xl rounded-b-md text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 shadow-md cursor-pointer bg-pink-100 text-pink-700 hover:bg-pink-200">
+                        <span>🍰</span>
+                        <span>3. 甜品</span>
+                    </button>
+                    <button onclick="jumpToCategory('drink')" id="tabBtn-drink" class="px-3.5 py-1.5 rounded-t-xl rounded-b-md text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 shadow-md cursor-pointer bg-emerald-100 text-emerald-800 hover:bg-emerald-200">
+                        <span>🍹</span>
+                        <span>4. 飲品</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2 text-xs text-stone-600 bg-white/90 px-3 py-1 rounded-full border border-stone-200 shadow-sm">
+                    <span class="text-rose-500">★</span>
+                    <span id="spreadStatusLabel">第一頁：總目錄 Content</span>
+                </div>
+            </div>
+
+            <!-- Open Book Outer Paper-Stack Frame (No Bark Texture inside Open Book) -->
+            <div class="relative w-full max-w-5xl bg-gradient-to-b from-[#f3e5ce] to-[#e2ceb0] rounded-[32px] p-2.5 sm:p-4 md:p-5 shadow-[0_28px_65px_rgba(68,42,22,0.28),0_10px_25px_rgba(68,42,22,0.16)] border border-[#d5bc99]">
+                
+                <!-- Flowing Paper Spread Wrapper -->
+                <div class="relative flex flex-col lg:flex-row w-full min-h-[610px] sm:min-h-[650px] rounded-[22px] overflow-hidden shadow-md bg-[#fffcf5]">
+                    
+                    <div class="hidden lg:block w-3.5 book-stack-left select-none"></div>
+
+                    <!-- LEFT PAGE (Cream Paper Texture - Ingredients & Photo) -->
+                    <div id="leftPageWrapper" class="flex-1 paper-texture spine-shadow-left relative p-5 sm:p-7 md:p-8 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-amber-900/15">
+                        <svg class="absolute top-0 left-0 w-full h-3 text-amber-200/40 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 400 12" fill="currentColor">
+                            <path d="M0,0 L400,0 L400,6 Q300,12 200,5 T0,8 Z"></path>
+                        </svg>
+
+                        <div id="leftPageContent" class="relative z-10 flex-1 flex flex-col justify-between h-full"></div>
+                    </div>
+
+                    <!-- Center Book Spine Crease -->
+                    <div class="hidden lg:flex flex-col justify-around items-center w-2.5 bg-gradient-to-r from-[#d8c09e] via-[#b89972] to-[#d8c09e] z-20 py-10 shadow-inner">
+                        <span class="w-3.5 h-1.5 rounded-full bg-[#fffdf9] shadow-xs"></span>
+                        <span class="w-3.5 h-1.5 rounded-full bg-[#fffdf9] shadow-xs"></span>
+                        <span class="w-3.5 h-1.5 rounded-full bg-[#fffdf9] shadow-xs"></span>
+                        <span class="w-3.5 h-1.5 rounded-full bg-[#fffdf9] shadow-xs"></span>
+                        <span class="w-3.5 h-1.5 rounded-full bg-[#fffdf9] shadow-xs"></span>
+                    </div>
+
+                    <!-- RIGHT PAGE (Cream Paper Texture - Blanching/Prep & Cooking Steps) -->
+                    <div id="rightPageWrapper" class="flex-1 paper-texture spine-shadow-right relative p-5 sm:p-7 md:p-8 flex flex-col justify-between">
+                        <svg class="absolute top-0 left-0 w-full h-3 text-amber-200/40 pointer-events-none" preserveAspectRatio="none" viewBox="0 0 400 12" fill="currentColor">
+                            <path d="M0,0 L400,0 L400,8 Q300,2 200,7 T0,5 Z"></path>
+                        </svg>
+
+                        <div id="rightPageContent" class="relative z-10 flex-1 flex flex-col justify-between h-full"></div>
+                    </div>
+
+                    <div class="hidden lg:block w-3.5 book-stack-right select-none"></div>
+
+                    <!-- Flip Leaf Overlay (Hidden by default so it NEVER blocks the right page!) -->
+                    <div id="pageFlipOverlay" class="hidden pointer-events-none absolute top-0 bottom-0 right-3.5 w-[calc(50%-14px)] paper-texture z-30 rounded-r-xl border-l border-amber-300/60"></div>
+                </div>
+
+                <!-- Bottom Navigation Controls -->
+                <div class="mt-3 px-2 flex items-center justify-between text-stone-700">
+                    <button id="btnPrevSpread" onclick="turnSpread(-1)" class="px-4 py-1.5 rounded-full bg-white hover:bg-rose-500 text-stone-700 hover:text-white border border-amber-300/80 transition-all text-xs sm:text-sm font-semibold flex items-center gap-2 cursor-pointer disabled:opacity-40 disabled:pointer-events-none shadow-sm">
+                        <i class="fa-solid fa-chevron-left"></i>
+                        <span>上一頁翻頁</span>
+                    </button>
+
+                    <div class="flex items-center gap-2 text-xs sm:text-sm font-hand tracking-wider text-amber-900">
+                        <span>✦ Sofia's Recipe Book · 每一道料理都是閃閃發光的日常 ✦</span>
+                    </div>
+
+                    <button id="btnNextSpread" onclick="turnSpread(1)" class="px-4 py-1.5 rounded-full bg-white hover:bg-rose-500 text-stone-700 hover:text-white border border-amber-300/80 transition-all text-xs sm:text-sm font-semibold flex items-center gap-2 cursor-pointer disabled:opacity-40 disabled:pointer-events-none shadow-sm">
+                        <span>下一頁翻頁</span>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="recipeModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-stone-900/60 backdrop-blur-sm p-3 sm:p-5 overflow-y-auto">
+        <div class="paper-texture w-full max-w-2xl rounded-3xl border-2 border-amber-800/30 shadow-2xl p-5 sm:p-7 relative my-auto max-h-[92vh] overflow-y-auto recipe-scroll">
+            
+            <div class="flex items-center justify-between pb-3 border-b border-dashed border-amber-800/25">
+                <div class="flex items-center gap-2">
+                    <span class="w-8 h-8 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center font-bold">✦</span>
+                    <div>
+                        <h3 id="modalTitle" class="text-lg sm:text-xl font-bold text-stone-800">撰寫新的食譜手札</h3>
+                        <p class="text-xs text-stone-500">新增後將自動編入目錄與對應頁碼</p>
+                    </div>
+                </div>
+                <button onclick="closeRecipeModal()" class="w-8 h-8 rounded-full bg-stone-200/80 hover:bg-rose-100 text-stone-600 hover:text-rose-600 flex items-center justify-center transition-colors cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <form id="recipeForm" onsubmit="saveRecipeFromModal(event)" class="mt-4 space-y-4 text-xs sm:text-sm">
+                <input type="hidden" id="editRecipeId" value="">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                        <label class="block font-bold text-stone-700 mb-1">✨ 菜譜名稱 <span class="text-rose-500">*</span></label>
+                        <input type="text" id="inputTitle" required placeholder="例如：焦糖海鹽舒芙蕾鬆餅" class="w-full px-3.5 py-2 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-stone-700 mb-1">📂 所屬四大分類 <span class="text-rose-500">*</span></label>
+                        <select id="inputCategory" required class="w-full px-3.5 py-2 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm">
+                            <option value="chinese">1. 中式菜譜 (Chinese Cuisine)</option>
+                            <option value="western">2. 西式菜譜 (Western Cuisine)</option>
+                            <option value="dessert">3. 甜品 (Desserts)</option>
+                            <option value="drink">4. 飲品 (Beverages)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+                    <div>
+                        <label class="block font-bold text-stone-700 mb-1">⏱️ 燉煮/製作時間 <span class="text-rose-500">*</span></label>
+                        <input type="text" id="inputTime" required placeholder="例如：慢燉 45 分鐘" class="w-full px-3.5 py-2 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-stone-700 mb-1">🎀 靈動心情標籤</label>
+                        <input type="text" id="inputMood" placeholder="例如：深夜治癒系 ★" class="w-full px-3.5 py-2 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-stone-700 mb-1">🍓 代表小圖示</label>
+                        <input type="text" id="inputEmoji" placeholder="例如：🍲 / 🥞 / 🧋" maxlength="4" class="w-full px-3.5 py-2 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-stone-700 mb-1">📸 料理美照（圖片網址）</label>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <input type="url" id="inputImageUrl" placeholder="貼上圖片網址 https://... 或點擊右側上傳" class="flex-1 px-3.5 py-2 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm">
+                        <label class="px-3.5 py-2 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 font-semibold cursor-pointer text-center transition-colors shrink-0 shadow-sm">
+                            <i class="fa-solid fa-camera mr-1"></i>上傳照片
+                            <input type="file" id="inputImageFile" accept="image/*" class="hidden" onchange="handleLocalImageUpload(event)">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Left Page Content: Ingredients Preparation -->
+                <div>
+                    <label class="block font-bold text-stone-700 mb-1">🧺 左頁：食材準備清單 (每行一項，將顯示於左頁) <span class="text-rose-500">*</span></label>
+                    <textarea id="inputIngredients" rows="3" required placeholder="五花肉 400g&#10;冰糖 25g&#10;紹興酒 2大匙&#10;蔥段與薑片 適量" class="w-full p-3 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm"></textarea>
+                </div>
+
+                <!-- Right Page Stage 1: Dedicated Pre-Prep Field (獨立編輯前期處理) -->
+                <div class="p-3.5 rounded-2xl bg-amber-50/80 border border-amber-300/90">
+                    <label class="block font-bold text-amber-950 mb-1">💧 右頁階段一：食材前期處理 Pre-Prep（焯水／醃製／備料，獨立編輯） <span class="text-rose-500">*</span></label>
+                    <textarea id="inputPrePrep" rows="2" required placeholder="例如：五花肉冷水入鍋，加入薑片與少許料酒焯水3分鐘，撈出以溫水洗淨瀝乾備用。" class="w-full p-2.5 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm"></textarea>
+                </div>
+
+                <!-- Right Page Stage 2: Dedicated Cooking Steps Field (獨立編輯烹飪步驟) -->
+                <div class="p-3.5 rounded-2xl bg-rose-50/50 border border-rose-200/90">
+                    <label class="block font-bold text-stone-800 mb-1">🔥 右頁階段二：具體烹飪做法步驟 Cooking Steps（每行一個步驟，與前期處理分開） <span class="text-rose-500">*</span></label>
+                    <textarea id="inputSteps" rows="4" required placeholder="鍋中不放油，小火慢煎五花肉至四面微焦逼出油脂。&#10;利用餘油小火炒出琥珀色糖色，放入肉塊翻炒上色。&#10;加入溫水與香料，蓋鍋小火慢燉45分鐘至軟糯收汁。" class="w-full p-2.5 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm"></textarea>
+                </div>
+
+                <div>
+                    <label class="block font-bold text-stone-700 mb-1">💫 靈動美味小撇步 (選填)</label>
+                    <input type="text" id="inputTip" placeholder="例如：起鍋前淋上一點點桂花蜜，香氣瞬間升級！" class="w-full px-3.5 py-2 rounded-xl bg-white border border-amber-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-sm">
+                </div>
+
+                <div class="pt-3 border-t border-dashed border-amber-800/25 flex items-center justify-end gap-2.5">
+                    <button type="button" onclick="closeRecipeModal()" class="px-4 py-2 rounded-full bg-stone-200 hover:bg-stone-300 text-stone-700 font-medium cursor-pointer">
+                        取消
+                    </button>
+                    <button type="submit" class="px-6 py-2 rounded-full bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-bold shadow-md cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-solid fa-check"></i>
+                        <span>收入我的食譜本</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteConfirmModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-stone-900/50 backdrop-blur-sm p-4">
+        <div class="paper-texture max-w-sm w-full rounded-3xl p-6 border-2 border-rose-300 shadow-2xl text-center">
+            <div class="w-12 h-12 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center mx-auto mb-3 text-xl">
+                <i class="fa-solid fa-trash-can"></i>
+            </div>
+            <h4 class="font-bold text-lg text-stone-800">確定要撕下這頁食譜嗎？</h4>
+            <p id="deleteConfirmText" class="text-xs text-stone-500 mt-1 mb-5">刪除後目錄頁碼將會自動重新排列喔！</p>
+            <div class="flex items-center justify-center gap-3">
+                <button onclick="closeDeleteModal()" class="px-4 py-2 rounded-full bg-stone-200 text-stone-700 text-xs font-semibold cursor-pointer">先保留</button>
+                <button id="confirmDeleteBtn" class="px-5 py-2 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-xs font-semibold shadow cursor-pointer">確認撕下此頁</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== POPUP MODAL FOR CLOCK TIMER SELECTION (點擊時鐘彈出的時間選擇頁面) ==================== -->
+    <div id="timerModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-stone-900/55 backdrop-blur-sm p-4">
+        <div class="paper-texture w-full max-w-md rounded-3xl border-2 border-[#3d2c2e] shadow-[8px_8px_0px_#3d2c2e] p-5 sm:p-6 relative animate-fadeIn">
+            
+            <!-- Modal Header -->
+            <div class="flex items-center justify-between pb-3 border-b-2 border-dashed border-stone-800/20">
+                <div class="flex items-center gap-2.5">
+                    <div class="w-9 h-9 rounded-2xl bg-amber-100 border-2 border-stone-800 flex items-center justify-center text-stone-800 font-bold">
+                        ⏰
+                    </div>
+                    <div>
+                        <h3 class="text-base sm:text-lg font-black text-stone-800">Sofia 的靈動線條計時器</h3>
+                        <p class="text-[11px] text-stone-500">選擇計時長度，完成後將於時鐘右上方顯示倒數</p>
+                    </div>
+                </div>
+                <button onclick="closeTimerModal()" class="w-8 h-8 rounded-full bg-stone-200/80 hover:bg-rose-100 text-stone-700 hover:text-rose-600 flex items-center justify-center transition-colors cursor-pointer">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Quick Presets Grid -->
+            <div class="mt-4">
+                <label class="block text-xs font-bold text-stone-700 mb-2">✦ 快速選擇料理時間：</label>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <button type="button" onclick="selectPresetInModal(3, 0, '前期焯水 3 分鐘')" class="px-3 py-2 rounded-xl bg-white hover:bg-rose-50 border-2 border-stone-800/80 hover:border-rose-500 text-left transition-all cursor-pointer shadow-[2px_2px_0px_#3d2c2e]">
+                        <span class="block text-xs font-extrabold text-stone-800">💧 3 分鐘</span>
+                        <span class="block text-[10px] text-stone-500">食材焯水/備料</span>
+                    </button>
+                    <button type="button" onclick="selectPresetInModal(5, 0, '抓醃靜置 5 分鐘')" class="px-3 py-2 rounded-xl bg-white hover:bg-rose-50 border-2 border-stone-800/80 hover:border-rose-500 text-left transition-all cursor-pointer shadow-[2px_2px_0px_#3d2c2e]">
+                        <span class="block text-xs font-extrabold text-stone-800">🧂 5 分鐘</span>
+                        <span class="block text-[10px] text-stone-500">抓醃去腥入味</span>
+                    </button>
+                    <button type="button" onclick="selectPresetInModal(8, 0, '黃金煮麵 8 分鐘')" class="px-3 py-2 rounded-xl bg-white hover:bg-rose-50 border-2 border-stone-800/80 hover:border-rose-500 text-left transition-all cursor-pointer shadow-[2px_2px_0px_#3d2c2e]">
+                        <span class="block text-xs font-extrabold text-stone-800">🍝 8 分鐘</span>
+                        <span class="block text-[10px] text-stone-500">義大利麵彈牙</span>
+                    </button>
+                    <button type="button" onclick="selectPresetInModal(15, 0, '鮮香燜煮 15 分鐘')" class="px-3 py-2 rounded-xl bg-white hover:bg-rose-50 border-2 border-stone-800/80 hover:border-rose-500 text-left transition-all cursor-pointer shadow-[2px_2px_0px_#3d2c2e]">
+                        <span class="block text-xs font-extrabold text-stone-800">🥘 15 分鐘</span>
+                        <span class="block text-[10px] text-stone-500">鮮香入味燜煮</span>
+                    </button>
+                    <button type="button" onclick="selectPresetInModal(25, 0, '甜點烘焙 25 分鐘')" class="px-3 py-2 rounded-xl bg-white hover:bg-rose-50 border-2 border-stone-800/80 hover:border-rose-500 text-left transition-all cursor-pointer shadow-[2px_2px_0px_#3d2c2e]">
+                        <span class="block text-xs font-extrabold text-stone-800">🍰 25 分鐘</span>
+                        <span class="block text-[10px] text-stone-500">舒芙蕾/烘焙</span>
+                    </button>
+                    <button type="button" onclick="selectPresetInModal(45, 0, '慢火細燉 45 分鐘')" class="px-3 py-2 rounded-xl bg-white hover:bg-rose-50 border-2 border-stone-800/80 hover:border-rose-500 text-left transition-all cursor-pointer shadow-[2px_2px_0px_#3d2c2e]">
+                        <span class="block text-xs font-extrabold text-stone-800">🍲 45 分鐘</span>
+                        <span class="block text-[10px] text-stone-500">紅燒慢火細燉</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Custom Minutes & Seconds Input -->
+            <div class="mt-4 p-3.5 rounded-2xl bg-amber-50/90 border-2 border-stone-800/80">
+                <label class="block text-xs font-bold text-stone-700 mb-2">✦ 或自訂計時時間（分：秒）：</label>
+                <div class="flex items-center justify-center gap-2">
+                    <div class="flex flex-col items-center">
+                        <input type="number" id="modalMinInput" min="0" max="180" value="03" 
+                               class="w-20 py-2 text-center font-mono font-black text-2xl text-stone-800 bg-white rounded-xl border-2 border-stone-800 focus:outline-none focus:ring-2 focus:ring-rose-400">
+                        <span class="text-[11px] font-bold text-stone-500 mt-1">分鐘 (Min)</span>
+                    </div>
+                    <span class="text-2xl font-black text-stone-700 -mt-5">:</span>
+                    <div class="flex flex-col items-center">
+                        <input type="number" id="modalSecInput" min="0" max="59" value="00" 
+                               class="w-20 py-2 text-center font-mono font-black text-2xl text-stone-800 bg-white rounded-xl border-2 border-stone-800 focus:outline-none focus:ring-2 focus:ring-rose-400">
+                        <span class="text-[11px] font-bold text-stone-500 mt-1">秒數 (Sec)</span>
+                    </div>
+                </div>
+
+                <!-- Quick Add/Subtract Pills -->
+                <div class="mt-3 flex items-center justify-center flex-wrap gap-1.5">
+                    <button type="button" onclick="adjustModalTime(1, 0)" class="px-2.5 py-1 rounded-lg bg-white hover:bg-amber-100 border border-stone-700 text-[11px] font-bold text-stone-700 cursor-pointer">+1 分</button>
+                    <button type="button" onclick="adjustModalTime(5, 0)" class="px-2.5 py-1 rounded-lg bg-white hover:bg-amber-100 border border-stone-700 text-[11px] font-bold text-stone-700 cursor-pointer">+5 分</button>
+                    <button type="button" onclick="adjustModalTime(0, 10)" class="px-2.5 py-1 rounded-lg bg-white hover:bg-amber-100 border border-stone-700 text-[11px] font-bold text-stone-700 cursor-pointer">+10 秒 (測試擺動)</button>
+                    <button type="button" onclick=" setModalTimeValues(0, 5, '5秒快速體驗擺動鈴聲')" class="px-2.5 py-1 rounded-lg bg-rose-100 hover:bg-rose-200 border border-rose-400 text-[11px] font-bold text-rose-700 cursor-pointer">⚡ 5秒體驗</button>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-5 flex flex-wrap items-center justify-between gap-2">
+                <div class="flex items-center gap-1.5">
+                    <button type="button" onclick="resetLineTimer()" class="px-3 py-2 rounded-xl border-2 border-stone-800 bg-white hover:bg-stone-100 text-stone-700 text-xs font-bold cursor-pointer">
+                        重置歸零
+                    </button>
+                    <button type="button" onclick="testTimerMelody()" class="px-3 py-2 rounded-xl border-2 border-rose-300 bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold cursor-pointer flex items-center gap-1">
+                        <i class="fa-solid fa-music text-[10px]"></i>
+                        <span>試聽鈴聲</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <button type="button" id="modalPauseResumeBtn" onclick="togglePauseFromModal()" class="hidden px-3.5 py-2 rounded-xl border-2 border-amber-700 bg-amber-100 hover:bg-amber-200 text-amber-950 text-xs font-bold cursor-pointer">
+                        暫停 / 繼續
+                    </button>
+                    <button type="button" onclick="confirmAndStartClockTimer()" class="px-5 py-2 rounded-xl bg-[#3d2c2e] hover:bg-rose-500 text-white text-xs sm:text-sm font-extrabold shadow-[3px_3px_0px_#e07a5f] transition-all cursor-pointer flex items-center gap-1.5">
+                        <i class="fa-solid fa-play text-[10px]"></i>
+                        <span>確認並開始計時 ✦</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Box -->
+    <div id="toastBox" class="fixed bottom-5 right-5 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300 bg-stone-900/90 text-amber-100 px-4 py-2.5 rounded-full shadow-lg text-xs sm:text-sm flex items-center gap-2">
+        <span class="text-rose-400">✦</span>
+        <span id="toastText">已更新 Sofia 的食譜手札！</span>
+    </div>
+
+    <footer class="relative z-10 text-center py-3 text-xs text-stone-500 flex items-center justify-center gap-2">
+        <span>★</span>
+        <span>Sofia's Aesthetic Recipe Book · 會員閱讀 · 各自保存 · Firebase 雲端食譜</span>
+        <span>★</span>
+    </footer>
+
+    </div>
+    <script src="./firebase-config.js"></script>
+    <script src="./member-shared.js"></script>
+    <script>
+        const CATEGORIES = {
+            chinese: {
+                id: 'chinese',
+                num: '01',
+                name: '中式菜譜',
+                en: 'Chinese Cuisine',
+                icon: '🥢',
+                badgeBg: 'bg-rose-100 text-rose-700 border-rose-300',
+                accentText: 'text-rose-600',
+                paperTint: 'from-rose-50/70 to-amber-50/40',
+                desc: '煙火氣裡的溫柔慢燉'
+            },
+            western: {
+                id: 'western',
+                num: '02',
+                name: '西式菜譜',
+                en: 'Western Cuisine',
+                icon: '🥐',
+                badgeBg: 'bg-amber-100 text-amber-800 border-amber-300',
+                accentText: 'text-amber-700',
+                paperTint: 'from-amber-50/80 to-orange-50/40',
+                desc: '奶油與香草的浪漫樂章'
+            },
+            dessert: {
+                id: 'dessert',
+                num: '03',
+                name: '甜品',
+                en: 'Sweet Desserts',
+                icon: '🍰',
+                badgeBg: 'bg-pink-100 text-pink-700 border-pink-300',
+                accentText: 'text-pink-600',
+                paperTint: 'from-pink-50/80 to-rose-50/40',
+                desc: '少女心滿溢的糖分魔法'
+            },
+            drink: {
+                id: 'drink',
+                num: '04',
+                name: '飲品',
+                en: 'Sparkly Drinks',
+                icon: '🍹',
+                badgeBg: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+                accentText: 'text-emerald-700',
+                paperTint: 'from-emerald-50/70 to-teal-50/40',
+                desc: '咕嚕咕嚕的微風特調'
+            }
+        };
+
+        const CATEGORY_ORDER = ['chinese', 'western', 'dessert', 'drink'];
+
+        // 食譜內容由 JSON 匯入或表單輸入，不再寫在程式碼中。
+
+        const STORAGE_KEY = 'sofia_sparkly_recipes_v2';
+        let recipes = [];
+        let isBookOpen = false;
+        let currentSpreadIndex = 0;
+        let soundEnabled = true;
+        let pendingDeleteId = null;
+        let uploadedImageBase64 = '';
+
+        // Line Timer State Variables
+        let timerTotalSeconds = 180;
+        let timerRemainingSeconds = 180;
+        let timerIntervalId = null;
+        let isTimerRunning = false;
+        let alarmLoopIntervalId = null;
+
+        let pendingImport = null;
+        const MAX_RECIPES = 2000;
+
+        function makeRecipeId() {
+            return 'rec-' + (globalThis.crypto?.randomUUID?.() || (Date.now().toString(36) + '-' + Math.random().toString(36).slice(2)));
+        }
+
+        function isSafeImageUrl(value) {
+            if (!value) return true;
+            if (typeof value !== 'string') return false;
+            if (/^data:image\/(png|jpeg|jpg|gif|webp|avif);base64,[a-z0-9+/=\s]+$/i.test(value)) return true;
+            try { return ['https:', 'http:'].includes(new URL(value).protocol); }
+            catch { return false; }
+        }
+
+        function validateRecipeData(input) {
+            let list;
+            if (Array.isArray(input)) list = input;
+            else {
+                if (!input || input.format !== 'sofia-recipes' || input.version !== 1) {
+                    throw new Error('檔案格式不符：請使用 sofia-recipes、version: 1，或舊版的純食譜陣列。');
+                }
+                list = input.recipes;
+            }
+            if (!Array.isArray(list)) throw new Error('recipes 必須是陣列。');
+            if (list.length > MAX_RECIPES) throw new Error('每本最多支援 2,000 道食譜。');
+            const ids = new Set();
+            return list.map((item, index) => {
+                const prefix = '第 ' + (index + 1) + ' 道食譜：';
+                if (!item || typeof item !== 'object' || Array.isArray(item)) throw new Error(prefix + '必須是物件。');
+                function textField(key, max = 100000) {
+                    const value = item[key] ?? '';
+                    if (typeof value !== 'string') throw new Error(prefix + key + ' 必須是文字。');
+                    if (value.length > max) throw new Error(prefix + key + ' 內容過長。');
+                    return value;
+                }
+                function lines(key) {
+                    const values = item[key] ?? [];
+                    if (!Array.isArray(values) || values.some(x => typeof x !== 'string')) throw new Error(prefix + key + ' 必須是文字陣列，例如 ["第一項", "第二項"]。');
+                    if (values.length > 1000 || values.some(x => x.length > 100000)) throw new Error(prefix + key + ' 內容過長。');
+                    return [...values];
+                }
+                const title = textField('title', 300).trim();
+                if (!title) throw new Error(prefix + '缺少 title 食譜名稱。');
+                const category = textField('category', 30);
+                if (!Object.hasOwn(CATEGORIES, category)) throw new Error(prefix + 'category 請用 chinese、western、dessert 或 drink。');
+                const id = item.id === undefined || item.id === '' ? makeRecipeId() : textField('id', 100);
+                if (!/^[A-Za-z0-9_-]{1,100}$/.test(id)) throw new Error(prefix + 'id 只可使用英文字母、數字、底線和連字號。');
+                if (ids.has(id)) throw new Error(prefix + '檔案內有重複 id：' + id);
+                ids.add(id);
+                const imageUrl = textField('imageUrl', 20 * 1024 * 1024);
+                if (!isSafeImageUrl(imageUrl)) throw new Error(prefix + '圖片僅接受 http(s) 網址或 PNG/JPEG/GIF/WebP/AVIF 的 Base64 資料。');
+                return {id, title, category, time:textField('time',1000), mood:textField('mood',1000), emoji:textField('emoji',100), imageUrl, ingredients:lines('ingredients'), prePrep:textField('prePrep'), steps:lines('steps'), tip:textField('tip')};
+            });
+        }
+
+        function dataEnvelope(list) {
+            return {format:'sofia-recipes', version:1, exportedAt:new Date().toISOString(), recipes:list};
+        }
+
+        function downloadTextFile(filename, contents, mime = 'application/json;charset=utf-8') {
+            const url = URL.createObjectURL(new Blob([contents], {type:mime}));
+            const a = document.createElement('a');
+            a.href = url; a.download = filename;
+            document.body.appendChild(a); a.click(); a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 30000);
+        }
+
+        function downloadRecipeData(list, prefix = 'Sofia食譜') {
+            const stamp = new Date().toISOString().replace(/[:.]/g,'-');
+            downloadTextFile(prefix + '-' + stamp + '.json', JSON.stringify(dataEnvelope(list), null, 2));
+        }
+
+        function setDataMessage(message) {
+            document.getElementById('dataManagerMessage').textContent = message;
+        }
+
+        function downloadImportTemplate() {
+            const template = [{id:'my-tomato-eggs-001',title:'番茄炒蛋',category:'chinese',time:'15 分鐘',mood:'家常料理',emoji:'🍅',imageUrl:'',ingredients:['番茄 2 顆','雞蛋 3 顆','鹽 適量'],prePrep:'番茄洗淨切塊；雞蛋打散。',steps:['熱鍋加油，炒蛋後盛起。','炒軟番茄，加入雞蛋與鹽拌勻。'],tip:'可依口味調整。'}];
+            downloadRecipeData(template, 'Sofia匯入範本');
+        }
+
+        let importReadSequence = 0;
+        function planRecipeImport(current, incoming, mode) {
+            if (!['skip','update','replace'].includes(mode)) throw new Error('未知匯入方式。');
+            const oldIds = new Set(current.map(r => r.id));
+            const newIds = new Set(incoming.map(r => r.id));
+            const same = incoming.filter(r => oldIds.has(r.id)).length;
+            let result;
+            if (mode === 'replace') result = [...incoming];
+            else {
+                const map = new Map(current.map(r => [r.id,r]));
+                incoming.forEach(r => { if(mode === 'update' || !map.has(r.id)) map.set(r.id,r); });
+                result = [...map.values()];
+            }
+            if (result.length > MAX_RECIPES) throw new Error('合併後超過 2,000 道食譜。');
+            return {recipes:result, added:incoming.length-same, updated:mode === 'skip' ? 0 : same, skipped:mode === 'skip' ? same : 0, removed:mode === 'replace' ? current.filter(r => !newIds.has(r.id)).length : 0};
+        }
+
+        function updateImportPreview() {
+            if (!pendingImport) return;
+            const mode = document.getElementById('importMode').value;
+            document.getElementById('replaceConsentLabel').hidden = mode !== 'replace';
+            document.getElementById('replaceConsent').checked = false;
+            const titles = document.getElementById('importTitles'); titles.replaceChildren();
+            try {
+                const plan = planRecipeImport(recipes,pendingImport.recipes,mode);
+                document.getElementById('importCounts').textContent = '新增 ' + plan.added + ' · 更新 ' + plan.updated + ' · 略過 ' + plan.skipped + ' · 移除 ' + plan.removed + ' · 完成後共 ' + plan.recipes.length + ' 道';
+                pendingImport.recipes.slice(0,8).forEach(r => { const li=document.createElement('li'); li.textContent=r.title+'（'+CATEGORIES[r.category].name+'）'; titles.appendChild(li); });
+                if (pendingImport.recipes.length > 8) { const li=document.createElement('li'); li.textContent='其餘 '+(pendingImport.recipes.length-8)+' 道…'; titles.appendChild(li); }
+                document.getElementById('applyImportBtn').disabled = false;
+            } catch(error) { document.getElementById('importCounts').textContent=error.message; document.getElementById('applyImportBtn').disabled=true; }
+        }
+
+        function cancelRecipeImport(invalidate = true) {
+            if (invalidate) importReadSequence++;
+            pendingImport = null;
+            document.getElementById('importPreview').hidden = true;
+        }
+
+
+        function getOrderedRecipes() {
+            const grouped = [];
+            CATEGORY_ORDER.forEach(catKey => {
+                const items = recipes.filter(r => r.category === catKey);
+                grouped.push(...items);
+            });
+            return grouped;
+        }
+
+        function playPageFlipSound() {
+            if (!soundEnabled) return;
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioCtx();
+                const duration = 0.22;
+                const bufferSize = ctx.sampleRate * duration;
+                const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    const env = Math.sin((i / bufferSize) * Math.PI);
+                    data[i] = (Math.random() * 2 - 1) * env * 0.14;
+                }
+                const noise = ctx.createBufferSource();
+                noise.buffer = buffer;
+                const filter = ctx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.setValueAtTime(1100, ctx.currentTime);
+                filter.Q.setValueAtTime(1.4, ctx.currentTime);
+                noise.connect(filter);
+                filter.connect(ctx.destination);
+                noise.start();
+            } catch (err) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const icon = document.getElementById('soundIcon');
+            if (soundEnabled) {
+                icon.className = 'fa-solid fa-volume-high text-xs text-rose-500';
+                showToast('已開啟真實翻頁音效 ✦');
+            } else {
+                icon.className = 'fa-solid fa-volume-xmark text-xs text-stone-400';
+                showToast('已靜音翻頁音效');
+            }
+        }
+
+        function openBookFromCover() {
+            isBookOpen = true;
+            currentSpreadIndex = 0;
+            playPageFlipSound();
+            updateBookView();
+        }
+
+        function toggleBookCover() {
+            isBookOpen = !isBookOpen;
+            playPageFlipSound();
+            if (isBookOpen) {
+                currentSpreadIndex = 0;
+            }
+            updateBookView();
+        }
+
+        function updateBookView() {
+            const closedEl = document.getElementById('closedBookContainer');
+            const openEl = document.getElementById('openBookContainer');
+            const toggleText = document.getElementById('toggleBookStateText');
+            const btnGoMenu = document.getElementById('btnGoMenu');
+            const denseStars = document.getElementById('denseStarsGroup');
+            const cornerStars = document.getElementById('cornerStarsGroup');
+
+            if (!isBookOpen) {
+                closedEl.classList.remove('hidden');
+                closedEl.classList.add('flex');
+                openEl.classList.add('hidden');
+                openEl.classList.remove('flex');
+                toggleText.textContent = '翻開食譜書';
+                btnGoMenu.classList.add('hidden');
+                btnGoMenu.classList.remove('inline-flex');
+                denseStars.classList.remove('hidden');
+                cornerStars.classList.add('hidden');
+            } else {
+                closedEl.classList.add('hidden');
+                closedEl.classList.remove('flex');
+                openEl.classList.remove('hidden');
+                openEl.classList.add('flex');
+                toggleText.textContent = '闔上棕色書封';
+                btnGoMenu.classList.remove('hidden');
+                btnGoMenu.classList.add('inline-flex');
+                denseStars.classList.add('hidden');
+                cornerStars.classList.remove('hidden');
+                renderCurrentSpread();
+            }
+        }
+
+        function triggerFlipAnimation(direction) {
+            const overlay = document.getElementById('pageFlipOverlay');
+            if (!overlay || window.innerWidth < 1024) return;
+            overlay.classList.remove('animate-turn-next', 'animate-turn-prev');
+            void overlay.offsetWidth;
+            if (direction >= 0) {
+                overlay.classList.add('animate-turn-next');
+            } else {
+                overlay.classList.add('animate-turn-prev');
+            }
+            clearTimeout(window._flipAnimTimer);
+            window._flipAnimTimer = setTimeout(() => {
+                overlay.classList.remove('animate-turn-next', 'animate-turn-prev');
+            }, 640);
+        }
+
+        // Spread 0 = Table of Contents (no page number)
+        // Spread 1..N = Recipe 1..N (Left page = Ingredients & Photo, Right page = Blanching/Prep & Cooking Steps)
+        function getTotalSpreads() {
+            const ordered = getOrderedRecipes();
+            return 1 + Math.max(1, ordered.length);
+        }
+
+        function turnSpread(delta) {
+            const total = getTotalSpreads();
+            const nextIndex = currentSpreadIndex + delta;
+            if (nextIndex < 0 || nextIndex >= total) return;
+            currentSpreadIndex = nextIndex;
+            playPageFlipSound();
+            triggerFlipAnimation(delta);
+            renderCurrentSpread();
+        }
+
+        function goToMenuSpread() {
+            if (!isBookOpen) isBookOpen = true;
+            const delta = currentSpreadIndex === 0 ? 1 : -1;
+            currentSpreadIndex = 0;
+            playPageFlipSound();
+            updateBookView();
+            triggerFlipAnimation(delta);
+        }
+
+        function goToRecipePage(pageNumber) {
+            if (!isBookOpen) isBookOpen = true;
+            currentSpreadIndex = pageNumber;
+            playPageFlipSound();
+            updateBookView();
+            triggerFlipAnimation(1);
+        }
+
+        function jumpToCategory(categoryKey) {
+            const ordered = getOrderedRecipes();
+            const firstIdx = ordered.findIndex(r => r.category === categoryKey);
+            if (firstIdx !== -1) {
+                goToRecipePage(firstIdx + 1);
+            } else {
+                showToast(`「${CATEGORIES[categoryKey].name}」目前尚無食譜，可以稍後再回來看看。`);
+                if(isCloudEditor()) openRecipeModal(categoryKey);
+            }
+        }
+
+        function renderCurrentSpread() {
+            const ordered = getOrderedRecipes();
+            const leftContainer = document.getElementById('leftPageContent');
+            const rightContainer = document.getElementById('rightPageContent');
+            const statusLabel = document.getElementById('spreadStatusLabel');
+
+            const totalSpreads = getTotalSpreads();
+            document.getElementById('btnPrevSpread').disabled = (currentSpreadIndex <= 0);
+            document.getElementById('btnNextSpread').disabled = (currentSpreadIndex >= totalSpreads - 1);
+
+            updateActiveCategoryTab(ordered);
+
+            if (currentSpreadIndex === 0) {
+                statusLabel.textContent = '扉頁目錄：四大分類總覽 (目錄頁不設頁碼)';
+                leftContainer.innerHTML = buildTocLeftPageHTML(ordered);
+                rightContainer.innerHTML = buildTocRightPageHTML(ordered);
+            } else {
+                const pageNumber = currentSpreadIndex;
+                const currentRecipe = ordered[pageNumber - 1] || null;
+
+                if (currentRecipe) {
+                    statusLabel.textContent = `第 ${String(pageNumber).padStart(2, '0')} 頁：${currentRecipe.title}`;
+                    leftContainer.innerHTML = buildLeftRecipePageHTML(currentRecipe, pageNumber);
+                    rightContainer.innerHTML = buildRightRecipePageHTML(currentRecipe, pageNumber);
+                } else {
+                    statusLabel.textContent = `空白手札頁：第 ${String(pageNumber).padStart(2, '0')} 頁`;
+                    leftContainer.innerHTML = buildEmptyRecipeSlotHTML(pageNumber);
+                    rightContainer.innerHTML = buildEmptyRecipeSlotHTML(pageNumber);
+                }
+            }
+        }
+
+        function updateActiveCategoryTab(ordered) {
+            const allTabs = ['menu', 'chinese', 'western', 'dessert', 'drink'];
+            allTabs.forEach(t => {
+                const btn = document.getElementById(`tabBtn-${t}`);
+                if (!btn) return;
+                btn.classList.remove('ring-2', 'ring-amber-900', 'scale-105');
+            });
+
+            if (currentSpreadIndex === 0) {
+                document.getElementById('tabBtn-menu')?.classList.add('ring-2', 'ring-amber-900', 'scale-105');
+            } else {
+                const currentRec = ordered[currentSpreadIndex - 1];
+                if (currentRec && currentRec.category) {
+                    document.getElementById(`tabBtn-${currentRec.category}`)?.classList.add('ring-2', 'ring-amber-900', 'scale-105');
+                }
+            }
+        }
+
+        function buildTocLeftPageHTML(ordered) {
+            return `
+                <div class="flex flex-col h-full justify-between">
+                    <div>
+                        <div class="flex items-center justify-between border-b-2 border-stone-800 pb-3 mb-4">
+                            <div>
+                                <div class="inline-flex items-center gap-1.5 text-xs font-bold text-rose-500 tracking-widest uppercase">
+                                    <span>✦ SOFIA'S TABLE OF CONTENTS ✦</span>
+                                </div>
+                                <h2 class="text-2xl sm:text-3xl font-black text-stone-800 tracking-wide mt-0.5">
+                                    食譜總目錄 <span class="font-hand text-rose-400 text-2xl font-normal">Content Index</span>
+                                </h2>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-rose-50 border border-rose-200 flex flex-col items-center justify-center text-rose-500 rotate-6 shadow-sm">
+                                <span class="text-sm">★</span>
+                                <span class="text-[10px] font-bold">SOFIA</span>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 px-3.5 py-2.5 rounded-2xl bg-amber-50/80 border border-amber-200/80 text-xs text-stone-600 flex items-center justify-between">
+                            <span>💡 點擊目錄中的任何菜名，即可一秒翻頁至該食譜！</span>
+                            <span class="text-amber-600 font-bold">${ordered.length} 道私房菜</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            ${buildCategoryTocBlock('chinese', ordered)}
+                            ${buildCategoryTocBlock('western', ordered)}
+                        </div>
+                    </div>
+
+                    <div class="pt-4 mt-4 border-t border-dashed border-amber-800/20 flex items-center justify-between text-xs text-stone-400">
+                        <span class="font-hand text-base text-rose-400">✦ Part I & Part II ✦</span>
+                        <span>目錄扉頁 · 點擊菜名翻頁</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function buildTocRightPageHTML(ordered) {
+            return `
+                <div class="flex flex-col h-full justify-between">
+                    <div>
+                        <div class="flex items-center justify-between border-b-2 border-stone-800 pb-3 mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="px-2.5 py-1 rounded-full bg-pink-100 text-pink-600 text-xs font-bold">Sweet & Sip</span>
+                                <span class="font-hand text-xl text-stone-600">甜品與微風特調</span>
+                            </div>
+                            <button data-cloud-edit onclick="openRecipeModal()" class="px-3.5 py-1.5 rounded-full bg-stone-800 hover:bg-rose-500 text-white text-xs font-semibold transition-colors cursor-pointer shadow-sm">
+                                ＋ 添寫新頁
+                            </button>
+                        </div>
+
+                        <div class="space-y-4">
+                            ${buildCategoryTocBlock('dessert', ordered)}
+                            ${buildCategoryTocBlock('drink', ordered)}
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-dashed border-amber-800/20">
+                        <div class="wavy-paper-card bg-gradient-to-r from-rose-50 via-amber-50/70 to-pink-50 p-3.5 flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-2xl bg-white shadow-sm border border-rose-200 flex items-center justify-center text-lg">
+                                    ✨
+                                </div>
+                                <div>
+                                    <h4 class="text-xs sm:text-sm font-bold text-stone-800">今天想研發什麼新料理？</h4>
+                                    <p class="text-[11px] text-stone-500">隨時新增專屬食譜，目錄頁碼會自動幫妳對齊排好！</p>
+                                </div>
+                            </div>
+                            <button data-cloud-edit onclick="openRecipeModal()" class="shrink-0 px-3.5 py-2 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold shadow-sm transition-transform hover:scale-105 cursor-pointer">
+                                立即新增 ★
+                            </button>
+                        </div>
+                        <div class="mt-2.5 flex items-center justify-between text-xs text-stone-400">
+                            <span>目錄扉頁 · 不設頁碼</span>
+                            <span class="font-hand text-base text-amber-600">✦ Part III & Part IV ✦</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function buildCategoryTocBlock(catKey, ordered) {
+            const cat = CATEGORIES[catKey];
+            const itemsWithPage = [];
+            ordered.forEach((rec, idx) => {
+                if (rec.category === catKey) {
+                    itemsWithPage.push({ recipe: rec, pageNum: idx + 1 });
+                }
+            });
+
+            const rowsHTML = itemsWithPage.length > 0
+                ? itemsWithPage.map(({ recipe, pageNum }) => `
+                    <div onclick="goToRecipePage(${pageNum})" class="group flex items-baseline py-1.5 px-2 rounded-xl hover:bg-white/90 transition-all cursor-pointer">
+                        <span class="text-sm mr-1.5 group-hover:scale-125 transition-transform">${escapeHTML(recipe.emoji || cat.icon)}</span>
+                        <span class="text-xs sm:text-sm font-semibold text-stone-800 group-hover:text-rose-600 transition-colors">
+                            ${escapeHTML(recipe.title)}
+                        </span>
+                        <span class="ml-2 text-[11px] text-stone-400 hidden sm:inline">${escapeHTML(recipe.time)}</span>
+                        <span class="toc-dots"></span>
+                        <span class="px-2 py-0.5 rounded-md bg-amber-100/80 group-hover:bg-rose-500 group-hover:text-white text-stone-700 font-bold text-xs transition-colors">
+                            P.${String(pageNum).padStart(2, '0')}
+                        </span>
+                    </div>
+                `).join('')
+                : `
+                    <div data-cloud-edit onclick="openRecipeModal('${catKey}')" class="py-2 px-3 rounded-xl border border-dashed border-amber-300 text-xs text-stone-400 hover:text-rose-500 cursor-pointer flex items-center justify-between">
+                        <span>尚無${cat.name}，點擊這裡添加第一道吧！</span>
+                        <span>＋ 新增</span>
+                    </div>
+                `;
+
+            return `
+                <div class="rounded-2xl bg-white/60 border border-amber-900/10 p-3 shadow-sm">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-0.5 rounded-full border text-xs font-bold ${cat.badgeBg}">
+                                ${cat.num} · ${cat.name}
+                            </span>
+                            <span class="text-[11px] text-stone-400 font-hand text-sm">${cat.en}</span>
+                        </div>
+                        <button data-cloud-edit onclick="openRecipeModal('${catKey}')" title="在此分類新增食譜" class="text-[11px] text-stone-400 hover:text-rose-500 font-semibold cursor-pointer">
+                            ＋ 新增${cat.name}
+                        </button>
+                    </div>
+                    <div class="divide-y divide-amber-900/5">
+                        ${rowsHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        // LEFT PAGE: Dedicated to Ingredients Preparation (食材準備清單) + Polaroid Photo
+        function buildLeftRecipePageHTML(recipe, pageNumber) {
+            const cat = CATEGORIES[recipe.category] || CATEGORIES.chinese;
+            const fallbackImg = `https://placehold.co/600x360/fff5eb/9c4221?text=${encodeURIComponent(recipe.title).replace(/'/g, '%27')}`;
+
+            const ingredientsListHTML = (recipe.ingredients || []).map((ing, i) => `
+                <label class="flex items-start gap-2 py-1.5 px-2.5 rounded-lg hover:bg-white/90 cursor-pointer transition-colors text-xs sm:text-sm text-stone-700">
+                    <input type="checkbox" class="mt-0.5 accent-rose-500 rounded cursor-pointer w-4 h-4">
+                    <span class="leading-relaxed font-medium">${escapeHTML(ing)}</span>
+                </label>
+            `).join('');
+
+            return `
+                <div class="flex flex-col h-full justify-between relative">
+                    <div>
+                        <!-- Category Header & Actions -->
+                        <div class="flex items-center justify-between gap-2 pb-2.5 border-b border-dashed border-amber-900/20">
+                            <div class="flex items-center gap-2">
+                                <span class="px-3 py-1 rounded-full border text-xs font-bold flex items-center gap-1 shadow-sm ${cat.badgeBg}">
+                                    <span>${cat.icon}</span>
+                                    <span>${cat.num} ${cat.name}</span>
+                                </span>
+                                <span class="text-xs text-stone-500 font-hand text-base hidden sm:inline">${escapeHTML(recipe.mood || cat.desc)}</span>
+                            </div>
+
+                            <div class="flex items-center gap-1.5">
+                                <button data-cloud-edit onclick="openEditRecipeModal('${recipe.id}')" title="編輯此食譜" class="px-2.5 py-1 rounded-full bg-white hover:bg-amber-100 text-stone-600 border border-stone-200 text-xs flex items-center gap-1 transition-colors cursor-pointer">
+                                    <i class="fa-solid fa-pen-nib text-[10px]"></i>
+                                    <span>編輯</span>
+                                </button>
+                                <button data-cloud-edit onclick="promptDeleteRecipe('${recipe.id}')" title="刪除此食譜" class="w-7 h-7 rounded-full bg-white hover:bg-rose-100 text-stone-400 hover:text-rose-600 border border-stone-200 text-xs flex items-center justify-center transition-colors cursor-pointer">
+                                    <i class="fa-solid fa-trash-can text-[11px]"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recipe Title -->
+                        <div class="mt-3">
+                            <h2 class="text-xl sm:text-2xl font-black text-stone-800 flex items-center gap-2">
+                                <span>${escapeHTML(recipe.emoji || cat.icon)}</span>
+                                <span>${escapeHTML(recipe.title)}</span>
+                            </h2>
+                        </div>
+
+                        <!-- Left Page Focus: Polaroid Photo & Ingredients List -->
+                        <div class="mt-4 space-y-3.5">
+                            <!-- Polaroid Photo (No text caption underneath) -->
+                            <div class="relative group max-w-sm mx-auto">
+                                <div class="washi-tape absolute -top-2.5 left-1/2 -translate-x-1/2 w-20 h-5 z-10 rotate-[-3deg]"></div>
+                                <div class="bg-white p-2.5 rounded-2xl shadow-md border border-stone-200/90 flex flex-col justify-between transform rotate-[-0.5deg]">
+                                    <div class="relative w-full h-40 sm:h-44 rounded-xl overflow-hidden bg-amber-50">
+                                        <img src="${escapeHTML(isSafeImageUrl(recipe.imageUrl) ? (recipe.imageUrl || fallbackImg) : fallbackImg)}" 
+                                             alt="${escapeHTML(recipe.title)}"
+                                             onerror="this.onerror=null;this.src='${fallbackImg}';"
+                                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ingredients Preparation Card -->
+                            <div class="wavy-paper-card bg-gradient-to-br ${cat.paperTint} p-3.5 shadow-sm">
+                                <div class="flex items-center justify-between mb-2 pb-1.5 border-b border-amber-900/10">
+                                    <span class="text-xs sm:text-sm font-extrabold text-stone-800 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-basket-shopping text-rose-500"></i>
+                                        <span>🧺 左頁：食材準備清單 Ingredients</span>
+                                    </span>
+                                    <span class="text-[10px] text-stone-500">可點擊打勾備料</span>
+                                </div>
+                                <div class="grid grid-cols-1 gap-0.5 max-h-48 overflow-y-auto recipe-scroll pr-1">
+                                    ${ingredientsListHTML}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Left Page Footer -->
+                    <div class="pt-3 mt-3 border-t border-dashed border-amber-900/20 flex items-center justify-between text-xs text-stone-500">
+                        <button onclick="goToMenuSpread()" class="hover:text-rose-500 transition-colors flex items-center gap-1 cursor-pointer">
+                            <i class="fa-solid fa-arrow-left text-[10px]"></i>
+                            <span>返回目錄</span>
+                        </button>
+                        <span class="font-hand text-base text-amber-800">✦ Recipe Notes ✦</span>
+                        <span class="text-[11px] text-stone-400">左頁：美照與食材準備</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // RIGHT PAGE: Dedicated to Pre-prep (獨立編輯的焯水/備料) + Cooking Methods (具體做法步驟) & Tips
+        function buildRightRecipePageHTML(recipe, pageNumber) {
+            const prePrepText = recipe.prePrep || '食材洗淨切配，需要焯水或去腥的食材先行處理備用。';
+            const steps = Array.isArray(recipe.steps) ? recipe.steps : [];
+
+            const stepsListHTML = steps.length > 0
+                ? steps.map((step, i) => `
+                    <div class="flex items-start gap-3 py-2.5 px-2 rounded-xl hover:bg-amber-50/50 transition-colors">
+                        <span class="shrink-0 w-6 h-6 rounded-full bg-amber-800 text-amber-50 text-xs font-bold flex items-center justify-center mt-0.5 shadow-xs">
+                            ${i + 1}
+                        </span>
+                        <p class="text-xs sm:text-sm text-stone-700 leading-relaxed font-medium">${escapeHTML(step)}</p>
+                    </div>
+                `).join('')
+                : `
+                    <div class="py-3 px-2 text-xs text-stone-400">尚未填寫具體烹飪步驟。</div>
+                `;
+
+            return `
+                <div class="flex flex-col h-full justify-between relative">
+                    <div>
+                        <!-- Right Page Header Banner -->
+                        <div class="flex items-center justify-between pb-2.5 border-b border-dashed border-amber-900/20">
+                            <div class="flex items-center gap-2">
+                                <span class="px-3 py-1 rounded-full border text-xs font-bold bg-amber-50 text-amber-900 border-amber-300 shadow-xs">
+                                    <span>👩‍🍳</span>
+                                    <span>${escapeHTML(recipe.title)} · 備料與做法</span>
+                                </span>
+                            </div>
+                            <span class="text-xs font-hand text-rose-500 font-bold text-base">Sofia's Kitchen ✦</span>
+                        </div>
+
+                        <!-- Right Page Section 1: Dedicated Pre-processing (獨立欄位：焯水 / 醃製 / 前置備料) -->
+                        <div class="mt-4 space-y-3.5">
+                            <div class="wavy-paper-card bg-gradient-to-r from-amber-50/90 to-rose-50/60 p-3.5 border border-amber-300/70 shadow-xs">
+                                <div class="flex items-center justify-between gap-2 mb-1.5">
+                                    <span class="text-xs sm:text-sm font-extrabold text-amber-950 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-droplet text-rose-500"></i>
+                                        <span>💧 食材前期處理 Pre-Prep（焯水／醃製／備料）</span>
+                                    </span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-stone-700 leading-relaxed font-medium bg-white/85 rounded-xl p-2.5 border border-amber-200/60">
+                                    ${escapeHTML(prePrepText)}
+                                </p>
+                            </div>
+
+                            <!-- Right Page Section 2: Cooking Methods (獨立欄位：具體烹飪做法步驟) -->
+                            <div class="wavy-paper-card bg-white/95 p-4 border border-amber-900/15 shadow-xs">
+                                <div class="flex items-center justify-between mb-2 pb-1.5 border-b border-dashed border-amber-900/15">
+                                    <span class="text-xs sm:text-sm font-extrabold text-stone-800 flex items-center gap-1.5">
+                                        <i class="fa-solid fa-fire-burner text-amber-600"></i>
+                                        <span>🔥 具體烹飪做法步驟 Cooking Methods</span>
+                                    </span>
+                                    <button data-cloud-edit onclick="openEditRecipeModal('${recipe.id}', 'steps')" class="text-[11px] text-stone-500 hover:text-rose-500 font-semibold cursor-pointer">
+                                        ✎ 編輯步驟
+                                    </button>
+                                </div>
+                                <div class="divide-y divide-amber-900/5 max-h-52 overflow-y-auto recipe-scroll pr-1">
+                                    ${stepsListHTML}
+                                </div>
+                            </div>
+
+                            <!-- Secret Tip Note -->
+                            ${recipe.tip ? `
+                            <div class="p-3.5 rounded-2xl bg-rose-50/90 border border-rose-200 text-xs sm:text-sm text-rose-900 flex items-start gap-2.5 shadow-xs">
+                                <span class="text-rose-500 font-bold text-base shrink-0">💫</span>
+                                <div>
+                                    <span class="font-bold block mb-0.5 text-rose-700">料理美味小撇步：</span>
+                                    <span class="leading-relaxed">${escapeHTML(recipe.tip)}</span>
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <!-- Right Page Footer with Page Number -->
+                    <div class="pt-3 mt-3 border-t border-dashed border-amber-900/20 flex items-center justify-between text-xs text-stone-500">
+                        <span class="text-[11px] text-stone-500">右頁：焯水處理與做法</span>
+                        <div class="flex items-center gap-1.5 font-serif font-bold text-stone-700 bg-amber-100/85 px-3 py-0.5 rounded-full border border-amber-300 shadow-xs">
+                            <span class="text-rose-400 text-[10px]">✦</span>
+                            <span>Page ${String(pageNumber).padStart(2, '0')}</span>
+                            <span class="text-rose-400 text-[10px]">✦</span>
+                        </div>
+                        <button onclick="goToMenuSpread()" class="hover:text-rose-500 transition-colors flex items-center gap-1 cursor-pointer">
+                            <span>目錄</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function buildEmptyRecipeSlotHTML(pageNumber) {
+            return `
+                <div class="flex flex-col h-full justify-between">
+                    <div class="my-auto text-center px-6 py-12 wavy-paper-card bg-white/50 border-2 border-dashed border-amber-300">
+                        <div class="w-14 h-14 rounded-full bg-rose-50 border border-rose-200 text-rose-400 flex items-center justify-center mx-auto mb-3 text-2xl star-float">
+                            ✦
+                        </div>
+                        <h3 class="text-lg font-bold text-stone-700">這頁空白手札正等著新的靈感</h3>
+                        <p class="text-xs text-stone-500 mt-1 max-w-xs mx-auto leading-relaxed">
+                            左頁記錄食材準備清單，右頁記錄焯水與烹飪步驟，記下每一次料理靈感。
+                        </p>
+                        <button data-cloud-edit onclick="openRecipeModal()" class="mt-5 px-5 py-2.5 rounded-full bg-gradient-to-r from-rose-400 to-amber-400 hover:from-rose-500 hover:to-amber-500 text-white text-xs font-bold shadow-md transition-transform hover:scale-105 cursor-pointer inline-flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>在此頁新增第 ${pageNumber} 頁食譜</span>
+                        </button>
+                    </div>
+
+                    <div class="pt-3 mt-3 border-t border-dashed border-amber-900/20 flex items-center justify-between text-xs text-stone-500">
+                        <button onclick="goToMenuSpread()" class="hover:text-rose-500 transition-colors cursor-pointer">
+                            ← 返回目錄
+                        </button>
+                        <div class="flex items-center gap-1.5 font-serif font-bold text-stone-600 bg-amber-100/50 px-3 py-0.5 rounded-full border border-amber-200 shadow-xs">
+                            <span>✦ Page ${String(pageNumber).padStart(2, '0')} ✦</span>
+                        </div>
+                        <span>待書寫手札</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        function openRecipeModal(defaultCat = 'chinese') {
+            if(!requireCloudEditor()) return;
+            cloud.editBase=null;
+            uploadedImageBase64 = '';
+            document.getElementById('editRecipeId').value = '';
+            document.getElementById('modalTitle').textContent = '撰寫新的食譜手札';
+            document.getElementById('inputTitle').value = '';
+            document.getElementById('inputCategory').value = CATEGORIES[defaultCat] ? defaultCat : 'chinese';
+            document.getElementById('inputTime').value = '';
+            document.getElementById('inputMood').value = '';
+            document.getElementById('inputEmoji').value = '';
+            document.getElementById('inputImageUrl').value = '';
+            document.getElementById('inputIngredients').value = '';
+            document.getElementById('inputPrePrep').value = '';
+            document.getElementById('inputSteps').value = '';
+            document.getElementById('inputTip').value = '';
+
+            const modal = document.getElementById('recipeModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function openEditRecipeModal(recipeId, focusField = '') {
+            if(!requireCloudEditor()) return;
+            const rec = recipes.find(r => r.id === recipeId);
+            if (!rec) return;
+            cloud.editBase=JSON.stringify(rec);
+
+            uploadedImageBase64 = '';
+            document.getElementById('editRecipeId').value = rec.id;
+            document.getElementById('modalTitle').textContent = `編輯食譜：${rec.title}`;
+            document.getElementById('inputTitle').value = rec.title || '';
+            document.getElementById('inputCategory').value = rec.category || 'chinese';
+            document.getElementById('inputTime').value = rec.time || '';
+            document.getElementById('inputMood').value = rec.mood || '';
+            document.getElementById('inputEmoji').value = rec.emoji || '';
+            document.getElementById('inputImageUrl').value = rec.imageUrl && !rec.imageUrl.startsWith('data:') ? rec.imageUrl : '';
+            if (rec.imageUrl && rec.imageUrl.startsWith('data:')) {
+                uploadedImageBase64 = rec.imageUrl;
+            }
+            document.getElementById('inputIngredients').value = (rec.ingredients || []).join('\n');
+            document.getElementById('inputPrePrep').value = rec.prePrep || '';
+            document.getElementById('inputSteps').value = (rec.steps || []).join('\n');
+            document.getElementById('inputTip').value = rec.tip || '';
+
+            const modal = document.getElementById('recipeModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            if (focusField === 'prePrep') {
+                setTimeout(() => document.getElementById('inputPrePrep')?.focus(), 100);
+            } else if (focusField === 'steps') {
+                setTimeout(() => document.getElementById('inputSteps')?.focus(), 100);
+            }
+        }
+
+        function closeRecipeModal() {
+            const modal = document.getElementById('recipeModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function handleLocalImageUpload(event) {
+            event.target.value='';
+            showToast('此雲端版本請使用圖片網址；照片上傳需要另外連接 Storage。');
+        }
+
+        function promptDeleteRecipe(recipeId) {
+            if(!requireCloudEditor())return;
+            const rec = recipes.find(r => r.id === recipeId);
+            if (!rec) return;
+            pendingDeleteId = recipeId;
+            cloud.deleteBase=JSON.stringify(rec);
+            cloud.deleteRevision=cloud.revision;
+            document.getElementById('deleteConfirmText').textContent = `確定要將「${rec.title}」從食譜書中移除嗎？移除後目錄頁碼會自動重新編排。`;
+            const modal = document.getElementById('deleteConfirmModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeDeleteModal() {
+            pendingDeleteId = null;
+            const modal = document.getElementById('deleteConfirmModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', () => confirmCloudDelete());
+
+        function showToast(msg) {
+            const box = document.getElementById('toastBox');
+            const txt = document.getElementById('toastText');
+            txt.textContent = msg;
+            box.classList.remove('opacity-0', 'translate-y-3');
+            box.classList.add('opacity-100', 'translate-y-0');
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
+                box.classList.add('opacity-0', 'translate-y-3');
+                box.classList.remove('opacity-100', 'translate-y-0');
+            }, 2600);
+        }
+
+        function escapeHTML(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (!isBookOpen) return;
+            const modalOpen = !document.getElementById('recipeModal').classList.contains('hidden');
+            const timerModalOpen = !document.getElementById('timerModal').classList.contains('hidden');
+            if (modalOpen || timerModalOpen) return;
+            if (e.key === 'ArrowRight') {
+                turnSpread(1);
+            } else if (e.key === 'ArrowLeft') {
+                turnSpread(-1);
+            }
+        });
+
+        // ==================== SOFIA'S HAND-DRAWN LINE CLOCK TIMER & ALARM SWING ====================
+        let currentTimerLabel = '自訂料理計時';
+        let hasActiveTimerSet = false;
+
+        function handleClockClick() {
+            // If the clock is currently ringing & swinging, clicking it stops the alarm immediately
+            if (alarmLoopIntervalId) {
+                stopTimerAlarm();
+                showToast('已停止鬧鐘響鈴與擺動 ✦');
+                return;
+            }
+            openTimerModal();
+        }
+
+        function openTimerModal() {
+            const mins = Math.floor(timerRemainingSeconds / 60);
+            const secs = timerRemainingSeconds % 60;
+            document.getElementById('modalMinInput').value = String(mins).padStart(2, '0');
+            document.getElementById('modalSecInput').value = String(secs).padStart(2, '0');
+
+            const pauseBtn = document.getElementById('modalPauseResumeBtn');
+            if (hasActiveTimerSet && timerRemainingSeconds > 0) {
+                pauseBtn.classList.remove('hidden');
+                pauseBtn.textContent = isTimerRunning ? '⏸ 暫停計時' : '▶ 繼續計時';
+            } else {
+                pauseBtn.classList.add('hidden');
+            }
+
+            const modal = document.getElementById('timerModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeTimerModal() {
+            const modal = document.getElementById('timerModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        function setModalTimeValues(mins, secs, label = '') {
+            document.getElementById('modalMinInput').value = String(mins).padStart(2, '0');
+            document.getElementById('modalSecInput').value = String(secs).padStart(2, '0');
+            if (label) currentTimerLabel = label;
+        }
+
+        function adjustModalTime(addMins, addSecs) {
+            let mins = parseInt(document.getElementById('modalMinInput').value, 10) || 0;
+            let secs = parseInt(document.getElementById('modalSecInput').value, 10) || 0;
+            let total = Math.max(1, (mins * 60 + secs) + (addMins * 60 + addSecs));
+            total = Math.min(180 * 60, total);
+            document.getElementById('modalMinInput').value = String(Math.floor(total / 60)).padStart(2, '0');
+            document.getElementById('modalSecInput').value = String(total % 60).padStart(2, '0');
+        }
+
+        function selectPresetInModal(mins, secs, label) {
+            setModalTimeValues(mins, secs, label);
+            confirmAndStartClockTimer();
+        }
+
+        function confirmAndStartClockTimer() {
+            stopTimerAlarm();
+            if (timerIntervalId) {
+                clearInterval(timerIntervalId);
+                isTimerRunning = false;
+            }
+
+            const mins = Math.max(0, Math.min(180, parseInt(document.getElementById('modalMinInput').value, 10) || 0));
+            const secs = Math.max(0, Math.min(59, parseInt(document.getElementById('modalSecInput').value, 10) || 0));
+            const total = Math.max(1, mins * 60 + secs);
+
+            timerTotalSeconds = total;
+            timerRemainingSeconds = total;
+            hasActiveTimerSet = true;
+
+            closeTimerModal();
+            startClockCountdownLoop();
+            showToast(`⏰ 已設定計時 ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}，時鐘右上方顯示剩餘時間 ✦`);
+        }
+
+        function togglePauseFromModal() {
+            if (!hasActiveTimerSet) return;
+            if (isTimerRunning) {
+                clearInterval(timerIntervalId);
+                isTimerRunning = false;
+                updateLineTimerUI();
+                closeTimerModal();
+                showToast('⏸ 已暫停時鐘計時');
+            } else {
+                closeTimerModal();
+                startClockCountdownLoop();
+                showToast('▶ 繼續時鐘計時');
+            }
+        }
+
+        function startClockCountdownLoop() {
+            stopTimerAlarm();
+            clearInterval(timerIntervalId);
+            isTimerRunning = true;
+            hasActiveTimerSet = true;
+            updateLineTimerUI();
+
+            timerIntervalId = setInterval(() => {
+                if (timerRemainingSeconds > 0) {
+                    timerRemainingSeconds--;
+                    updateLineTimerUI();
+                }
+                if (timerRemainingSeconds <= 0) {
+                    clearInterval(timerIntervalId);
+                    isTimerRunning = false;
+                    updateLineTimerUI();
+                    triggerTimerCompleteAlarm();
+                }
+            }, 1000);
+        }
+
+        function updateLineTimerUI() {
+            const mins = Math.floor(timerRemainingSeconds / 60);
+            const secs = timerRemainingSeconds % 60;
+            const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+
+            // 1. Update Top-Right Remaining Time Badge on the Clock
+            const badgeEl = document.getElementById('clockTopRightBadge');
+            const badgeText = document.getElementById('clockRemainingText');
+            const badgeDot = document.getElementById('clockBadgeDot');
+            const idleStar = document.getElementById('clockIdleStar');
+            const clockWidget = document.getElementById('doodleClockWidget');
+            const taskHint = document.getElementById('clockTaskHint');
+            const subStatus = document.getElementById('clockSubStatus');
+
+            if (badgeText) badgeText.textContent = formatted;
+
+            if (hasActiveTimerSet) {
+                badgeEl?.classList.remove('hidden');
+                badgeEl?.classList.add('inline-flex');
+                idleStar?.classList.add('hidden');
+            } else {
+                badgeEl?.classList.add('hidden');
+                badgeEl?.classList.remove('inline-flex');
+                idleStar?.classList.remove('hidden');
+            }
+
+            if (isTimerRunning) {
+                clockWidget?.classList.add('clock-ticking');
+                badgeDot?.classList.add('animate-ping', 'bg-rose-500');
+                badgeDot?.classList.remove('bg-amber-400');
+                if (taskHint) taskHint.textContent = `✦ 計時進行中 (${formatted})`;
+                if (subStatus) subStatus.textContent = currentTimerLabel || '點擊小鬧鐘可調整或暫停';
+            } else {
+                clockWidget?.classList.remove('clock-ticking');
+                badgeDot?.classList.remove('animate-ping', 'bg-rose-500');
+                badgeDot?.classList.add('bg-amber-400');
+                if (hasActiveTimerSet && timerRemainingSeconds > 0) {
+                    if (taskHint) taskHint.textContent = `⏸ 計時已暫停 (${formatted})`;
+                    if (subStatus) subStatus.textContent = '點擊小鬧鐘繼續或重新選擇時間';
+                } else if (!alarmLoopIntervalId) {
+                    if (taskHint) taskHint.textContent = '✦ Click clock to timer!';
+                    if (subStatus) subStatus.textContent = '點擊簡筆畫時鐘設定倒數計時';
+                }
+            }
+
+            // 2. Rotate Hour, Minute, and Second Hands on the Line-Art Clock
+            const hourHand = document.getElementById('clockHourHand');
+            const minuteHand = document.getElementById('clockMinuteHand');
+            const secondHand = document.getElementById('clockSecondHand');
+
+            const elapsedSeconds = Math.max(0, timerTotalSeconds - timerRemainingSeconds);
+
+            // Second hand moves 6 degrees every second
+            const secondDeg = (elapsedSeconds * 6) % 360;
+            // Minute hand moves smoothly with remaining minutes and seconds (6 deg per minute, 0.1 deg per second)
+            const minuteDeg = ((timerRemainingSeconds / 60) * 6) % 360;
+            // Hour hand moves with overall progress + hour scale so both hands visibly move during countdown
+            const hourDeg = ((elapsedSeconds / 120) * 30) % 360;
+
+            if (secondHand) secondHand.style.transform = `rotate(${secondDeg}deg)`;
+            if (minuteHand) minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+            if (hourHand) hourHand.style.transform = `rotate(${hourDeg}deg)`;
+        }
+
+        function setTimerPreset(mins, secs = 0, label = '') {
+            stopTimerAlarm();
+            const total = Math.max(1, mins * 60 + secs);
+            timerTotalSeconds = total;
+            timerRemainingSeconds = total;
+            currentTimerLabel = label || `計時 ${mins} 分鐘`;
+            hasActiveTimerSet = true;
+            startClockCountdownLoop();
+        }
+
+        function setTimerFromRecipeText(timeStr, recipeTitle) {
+            const match = String(timeStr).match(/(\d+)/);
+            const mins = match ? parseInt(match[1], 10) : 15;
+            setTimerPreset(mins, 0, `${recipeTitle} (${mins}分鐘)`);
+            showToast(`⏰ 已為「${recipeTitle}」啟動 ${mins} 分鐘時鐘計時！`);
+        }
+
+        function resetLineTimer() {
+            stopTimerAlarm();
+            if (timerIntervalId) {
+                clearInterval(timerIntervalId);
+            }
+            isTimerRunning = false;
+            hasActiveTimerSet = false;
+            timerRemainingSeconds = timerTotalSeconds;
+            updateLineTimerUI();
+            closeTimerModal();
+            showToast('時鐘計時器已重置 ✦');
+        }
+
+        // Synthesize Sofia's Music Box Melody when Timer Completes
+        function playMusicBoxPhrase() {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                const ctx = new AudioCtx();
+                const notes = [
+                    { f: 523.25, t: 0.0, d: 0.35 },
+                    { f: 659.25, t: 0.22, d: 0.35 },
+                    { f: 783.99, t: 0.44, d: 0.35 },
+                    { f: 987.77, t: 0.66, d: 0.45 },
+                    { f: 1046.50, t: 0.92, d: 0.65 },
+                    { f: 987.77, t: 1.30, d: 0.35 },
+                    { f: 783.99, t: 1.52, d: 0.35 },
+                    { f: 659.25, t: 1.74, d: 0.45 },
+                    { f: 587.33, t: 2.05, d: 0.35 },
+                    { f: 698.46, t: 2.27, d: 0.35 },
+                    { f: 880.00, t: 2.49, d: 0.45 },
+                    { f: 1174.66, t: 2.75, d: 0.55 },
+                    { f: 1046.50, t: 3.15, d: 0.90 }
+                ];
+
+                notes.forEach(n => {
+                    const osc = ctx.createOscillator();
+                    const overtone = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    const overGain = ctx.createGain();
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(n.f, ctx.currentTime + n.t);
+
+                    overtone.type = 'triangle';
+                    overtone.frequency.setValueAtTime(n.f * 2, ctx.currentTime + n.t);
+
+                    gain.gain.setValueAtTime(0.0001, ctx.currentTime + n.t);
+                    gain.gain.exponentialRampToValueAtTime(0.18, ctx.currentTime + n.t + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + n.t + n.d);
+
+                    overGain.gain.setValueAtTime(0.0001, ctx.currentTime + n.t);
+                    overGain.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + n.t + 0.015);
+                    overGain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + n.t + n.d * 0.6);
+
+                    osc.connect(gain);
+                    overtone.connect(overGain);
+                    gain.connect(ctx.destination);
+                    overGain.connect(ctx.destination);
+
+                    osc.start(ctx.currentTime + n.t);
+                    overtone.start(ctx.currentTime + n.t);
+                    osc.stop(ctx.currentTime + n.t + n.d + 0.05);
+                    overtone.stop(ctx.currentTime + n.t + n.d + 0.05);
+                });
+            } catch (e) {
+                console.warn('音樂播放受限', e);
+            }
+        }
+
+        function triggerTimerCompleteAlarm() {
+            const clockWidget = document.getElementById('doodleClockWidget');
+            const stopBtn = document.getElementById('btnStopClockAlarm');
+            const taskHint = document.getElementById('clockTaskHint');
+            const subStatus = document.getElementById('clockSubStatus');
+            const badgeEl = document.getElementById('clockTopRightBadge');
+
+            // Make the hand-drawn clock physically swing & shake!
+            clockWidget?.classList.remove('clock-ticking');
+            clockWidget?.classList.add('clock-ringing-swing');
+            badgeEl?.classList.add('bg-rose-100', 'border-rose-600');
+
+            stopBtn?.classList.remove('hidden');
+            stopBtn?.classList.add('inline-flex');
+
+            if (taskHint) {
+                taskHint.innerHTML = `<span class="text-rose-600 font-bold">🎵 叮咚！時間到囉！✦</span>`;
+            }
+            if (subStatus) {
+                subStatus.textContent = '點擊搖晃中的小鬧鐘即可停止音樂';
+            }
+
+            showToast('🎵 時間到！Sofia 的小鬧鐘正在搖晃響鈴 ✦');
+            playMusicBoxPhrase();
+
+            clearInterval(alarmLoopIntervalId);
+            let repeatCount = 0;
+            alarmLoopIntervalId = setInterval(() => {
+                repeatCount++;
+                if (repeatCount >= 4) {
+                    stopTimerAlarm();
+                    return;
+                }
+                playMusicBoxPhrase();
+            }, 4000);
+        }
+
+        function stopTimerAlarm() {
+            clearInterval(alarmLoopIntervalId);
+            alarmLoopIntervalId = null;
+            const clockWidget = document.getElementById('doodleClockWidget');
+            const stopBtn = document.getElementById('btnStopClockAlarm');
+            const badgeEl = document.getElementById('clockTopRightBadge');
+
+            clockWidget?.classList.remove('clock-ringing-swing');
+            badgeEl?.classList.remove('bg-rose-100', 'border-rose-600');
+            stopBtn?.classList.add('hidden');
+            stopBtn?.classList.remove('inline-flex');
+        }
+
+        function testTimerMelody() {
+            const clockWidget = document.getElementById('doodleClockWidget');
+            clockWidget?.classList.add('clock-ringing-swing');
+            playMusicBoxPhrase();
+            showToast('🎵 正在試聽鈴聲與小鬧鐘搖擺效果 ✦');
+            setTimeout(() => {
+                if (!alarmLoopIntervalId) {
+                    clockWidget?.classList.remove('clock-ringing-swing');
+                }
+            }, 3800);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadRecipes();
+            updateBookView();
+            updateLineTimerUI();
+        });
+    </script>
+    <script src="./member-book.js"></script>
+</body>
+</html>
