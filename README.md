@@ -1,33 +1,11 @@
-# Sofia Kitchen — GitHub Pages 示範預覽
+# Sofia Kitchen
 
-這是展示網站操作的示範包，沒有連接 Firebase，也不會寄送重設密碼郵件。
-每個瀏覽器各自保存示範資料；朋友無法看到你在另一台電腦新增的內容。
-請使用虛構資料，不要輸入真實密碼或私人食譜。
+網站由 GitHub Pages 發布；登入、註冊、重設密碼由 Firebase Authentication 處理，食譜保存在 Cloud Firestore。
 
-## 上傳方式
+- 網址：https://z00d0llh0use-cpu.github.io/Sofia-Kitchen/
+- 登入後可建立自己的食譜，預設私人保存。
+- 分享為「會員可閱讀」後，其他登入會員可閱讀，只有擁有者可修改。
+- 頁面上的帳號與密碼只是不能登入的填寫範例。
+- 舊示範版的帳號與瀏覽器資料不會自動變成 Firebase 帳號。
 
-1. 建立或使用 Public 倉庫，例如 Sofia-Kitchen。
-2. 上傳本資料夾裡的所有檔案到倉庫最外層。不要上傳 ZIP，也不要多包一層資料夾。
-3. Settings → Pages → Deploy from a branch → main → /(root) → Save。
-4. 等待 Pages 顯示網址，開啟該網址。
-
-這一版已支援根網址與專案子路徑，例如 username.github.io/Sofia-Kitchen/。
-倉庫最外層必須直接有 index.html、login.html 等檔案；只有 README.md 時，Pages 會顯示說明頁。
-上傳時請進入解壓縮後的資料夾，全選裡面的檔案，不要多包一層資料夾。
-更新同名檔案後，保留 Pages 的 main、/(root) 設定即可自動重新發布。
-
-## 示範登入
-
-- 朋友帳號：friend@demo.local
-- Sofia 帳號：sofia@demo.local
-- 兩者的示範密碼：RecipeDemo2026!
-- Sofia 示範編號：10000001
-- 朋友示範編號：10000002
-
-也可用虛構電子郵件建立本機示範帳號。
-一般會員無法修改別人的食譜；私人書不會展示給其他帳號。
-這裡的權限檢查是示範程式，不能用來保存真實私人資料。
-正式會員版需要 Firebase Authentication、Firestore 與已驗證的資料庫規則。
-
-GitHub 的公開倉庫會公開這些前端程式碼。本包不含正式食譜備份、服務帳戶私鑰或正式 Firebase 連線設定。
-更新網站預覽
+更新時上傳本目錄全部檔案至 main 根目錄，保留 Pages 的 main、/(root) 設定。資料庫權限另由 Firestore Rules 管理。

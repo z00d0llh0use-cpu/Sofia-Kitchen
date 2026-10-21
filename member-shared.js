@@ -21,13 +21,12 @@ window.Member = (() => {
       if(location.protocol==='file:')throw new Error('請使用套件內的本機預覽啟動檔，或透過 Hosting 網址開啟。');
       state.settings=window.SOFIA_FIREBASE_SETTINGS;
       if(!state.settings?.firebaseConfig?.projectId||!state.settings.founderUid)throw new Error('找不到 Firebase 設定檔。');
-      if(window.SOFIA_DEMO_LOADER)state.sdk=await window.SOFIA_DEMO_LOADER();
-      else {
+      {
         const parts=await Promise.all(['app','auth','firestore'].map(name=>import('https://www.gstatic.com/firebasejs/13.0.0/firebase-'+name+'.js')));
         state.sdk=Object.assign({},...parts);
       }
       const sdk=state.sdk,app=sdk.initializeApp(state.settings.firebaseConfig,'sofia-kitchen-members-v1');
-      state.auth=sdk.getAuth(app);state.db=sdk.getFirestore(app);
+      state.auth=sdk.getAuth(app);state.auth.languageCode="zh-TW";state.db=sdk.getFirestore(app);
       await sdk.setPersistence(state.auth,sdk.browserSessionPersistence);
       if(sdk.demo){
         const banner=document.createElement('div');banner.className='demo-banner';banner.textContent='本機示範模式 · 不連接 Firebase，也不會寄送郵件';document.body.prepend(banner);

@@ -14,7 +14,7 @@
     try{
       const s=await M.init();
       if(page==='forgot'){
-        try{await s.sdk.sendPasswordResetEmail(s.auth,email);}catch(error){if(!String(error.code).includes('user-not-found'))throw error;}
+        try{await s.sdk.sendPasswordResetEmail(s.auth,email,{url:new URL("./login.html",location.href).href});}catch(error){if(!String(error.code).includes('user-not-found'))throw error;}
         M.message('authMessage',s.sdk.demo?'示範：已模擬送出重設要求，沒有寄送郵件。':'若該信箱可接收重設郵件，請查看收件匣與垃圾郵件。設定新密碼後，再回到登入頁。');
         form.reset();
       }else if(page==='register'){
